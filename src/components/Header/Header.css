@@ -4,5 +4,27 @@
   /* padding: 19px 104px 13px; */
   align-items: center;
   padding: 0 104px;
-  border-bottom: 1px solid red;
+  /* box-shadow: inset 0px -1px 0px #d1d2d6; */
+  box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
+  /* background: yellowgreen; */
+}
+
+.header_logged {
+  /* background: #fff; */
+  box-shadow: inset 0px -1px 0px #d1d2d6;
+}
+
+.header__logo {
+  text-decoration: none;
+  color: #fff;
+  font-family: 'Roboto Slab';
+  font-weight: 700;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 24px;
+  padding-bottom: 3px;
+}
+
+.header__logo_logged {
+  color: rgb(17, 16, 16);
 }

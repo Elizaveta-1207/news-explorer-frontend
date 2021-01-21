@@ -12,3 +12,10 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
 }
+
+.page__container {
+  width: 100%;
+  background-image: url(/src/images/header-background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}

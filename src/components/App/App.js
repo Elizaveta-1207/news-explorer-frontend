@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 // import { Switch, Route, Redirect, useHistory, useLocation } from 'react-router-dom';
 
 import Header from '../Header/Header';
@@ -10,17 +10,20 @@ import Footer from '../Footer/Footer';
 import './App.css';
 
 function App() {
+  const location = useLocation();
+
   return (
     <>
       <div className='page'>
-        <Header />
         <Switch>
           <Route exact path='/'>
-            <h1>App</h1>
-            <Main />
+            <div className='page__container'>
+              <Header location={location} />
+              <Main />
+            </div>
           </Route>
           <Route path='/saved-news'>
-            <h1>DO it</h1>
+            <Header location={location} />
             <SavedNews />
           </Route>
         </Switch>
