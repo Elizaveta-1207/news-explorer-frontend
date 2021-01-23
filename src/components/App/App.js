@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
+import About from '../About/About';
 
 import './App.css';
 
@@ -21,6 +22,7 @@ function App() {
               <Header location={location} />
               <Main />
             </div>
+            <About />
           </Route>
           <Route path='/saved-news'>
             <Header location={location} />
