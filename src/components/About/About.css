@@ -1,6 +1,6 @@
 .about {
   display: flex;
-  padding: 80px 200px 80px 104px;
+  padding: 80px 104px;
   margin: 0 auto;
   justify-content: space-between;
 }
@@ -14,6 +14,7 @@
 
 .about__info {
   max-width: 600px;
+  margin-left: 56px;
 }
 
 .about__title {

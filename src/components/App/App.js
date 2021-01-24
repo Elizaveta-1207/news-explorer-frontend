@@ -7,6 +7,7 @@ import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
 import About from '../About/About';
+import Preloader from '../Preloader/Preloader';
 
 import './App.css';
 
@@ -22,6 +23,7 @@ function App() {
               <Header location={location} />
               <Main />
             </div>
+            <Preloader />
             <About />
           </Route>
           <Route path='/saved-news'>

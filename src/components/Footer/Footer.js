@@ -12,15 +12,30 @@ function Footer() {
           <a href='/' className='footer__link'>
             Главная
           </a>
-          <a href='https://praktikum.yandex.ru/' className='footer__link'>
-            Яндекс Практикум
+          <a
+            target='_blank'
+            rel='noreferrer noopener'
+            href='https://praktikum.yandex.ru/'
+            className='footer__link'
+          >
+            Яндекс.Практикум
           </a>
         </div>
         <div className='footer__socials'>
-          <a href='https://github.com/Elizaveta-1207' className='footer__social'>
+          <a
+            target='_blank'
+            rel='noreferrer noopener'
+            href='https://github.com/Elizaveta-1207'
+            className='footer__social'
+          >
             <img src={GhIcon} className='footer__icon' alt='github link' />
           </a>
-          <a href='https://www.facebook.com/' className='footer__social'>
+          <a
+            target='_blank'
+            rel='noreferrer noopener'
+            href='https://www.facebook.com/'
+            className='footer__social'
+          >
             <img src={FbIcon} className='footer__icon' alt='facebook link' />
           </a>
         </div>

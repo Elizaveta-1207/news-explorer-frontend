@@ -32,7 +32,12 @@
   text-decoration: none;
   color: #1a1b22;
   margin-left: 40px;
-  transition: all 0.7s ease;
+  transition: all 0.3s ease-in-out;
+}
+
+.footer__link:hover {
+  opacity: 0.6;
+  transition: all 0.3s ease-in-out;
 }
 
 .footer__socials {
@@ -52,4 +57,9 @@
   text-align: center;
   width: 24px;
   height: 24px;
+}
+
+.footer__icon:hover {
+  opacity: 0.6;
+  transition: all 0.3s ease-in-out;
 }
