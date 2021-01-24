@@ -1,0 +1,33 @@
+.news {
+  box-sizing: border-box;
+
+  background-color: #f5f6f7;
+  width: 100%;
+}
+
+.news__container {
+  margin: 0 auto;
+  padding: 80px 18px;
+  max-width: 1232px;
+}
+
+.news__title {
+  margin: 0 0 64px;
+  font-family: 'Roboto Slab', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.2;
+  color: #1a1b22;
+}
+
+.news__list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 400px);
+  grid-gap: 16px;
+  max-width: 100%;
+  justify-content: center;
+  margin: 0;
+}

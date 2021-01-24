@@ -7,6 +7,8 @@
   /* box-shadow: inset 0px -1px 0px #d1d2d6; */
   box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
   /* background: yellowgreen; */
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .header_logged {
@@ -17,7 +19,7 @@
 .header__logo {
   text-decoration: none;
   color: #fff;
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', Arial, sans-serif;
   font-weight: 700;
   font-style: normal;
   font-size: 20px;

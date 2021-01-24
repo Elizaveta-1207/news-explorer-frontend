@@ -8,6 +8,7 @@ import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
 import About from '../About/About';
 import Preloader from '../Preloader/Preloader';
+import NewsCardList from '../NewsCardList/NewsCardList';
 
 import './App.css';
 
@@ -24,6 +25,7 @@ function App() {
               <Main />
             </div>
             <Preloader />
+            <NewsCardList location={location} />
             <About />
           </Route>
           <Route path='/saved-news'>
