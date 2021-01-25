@@ -31,6 +31,7 @@ function App() {
           <Route path='/saved-news'>
             <Header location={location} />
             <SavedNews />
+            <NewsCardList location={location} />
           </Route>
         </Switch>
         <Footer />

@@ -88,14 +88,19 @@
   outline: none;
 }
 
-.news-card__marker_unsaved:hover .news-card__path {
+.news-card__marker_unsaved:hover .news-card__path_save {
   stroke: #1a1b22;
   transition: all 0.3s ease-in-out;
 }
 
-.news-card__marker_saved .news-card__path {
+.news-card__marker_saved .news-card__path_save {
   fill: #2f71e5;
   stroke: #2f71e5;
+  transition: all 0.3s ease-in-out;
+}
+
+.news-card__marker_unsaved:hover .news-card__path_delete {
+  fill: #1a1b22;
   transition: all 0.3s ease-in-out;
 }
 
@@ -113,8 +118,7 @@
   color: #000;
   background-color: #fff;
   box-sizing: border-box;
-  width: 182px;
-  height: 40px;
+  padding: 14px 12px;
   border-radius: 10px;
   position: absolute;
   top: 24px;
