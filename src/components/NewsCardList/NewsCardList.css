@@ -9,6 +9,8 @@
   margin: 0 auto;
   padding: 80px 18px;
   max-width: 1232px;
+  display: flex;
+  flex-direction: column;
 }
 
 .news__title {
@@ -30,4 +32,29 @@
   max-width: 100%;
   justify-content: center;
   margin: 0;
+}
+
+.news__show-btn {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  border: none;
+  border-radius: 80px;
+  background-color: #fff;
+  text-align: center;
+  margin-top: 64px;
+  padding: 0;
+  box-sizing: border-box;
+  width: 288px;
+  height: 64px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  align-self: center;
+}
+
+.news__show-btn:hover {
+  opacity: 0.9;
+  transition: all 0.3s ease-in-out;
 }
