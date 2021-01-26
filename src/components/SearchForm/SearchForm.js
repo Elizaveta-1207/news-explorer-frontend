@@ -3,15 +3,15 @@ import React from 'react';
 function SearchForm() {
   return (
     <>
-      <form className='main__form' noValidate>
+      <form className='after-header__form' noValidate>
         <input
           type='text'
           name='request'
           placeholder='Введите тему новости'
           required
-          className='main__input'
+          className='after-header__input'
         />
-        <button type='submit' className='main__btn'>
+        <button type='submit' className='after-header__btn'>
           Искать
         </button>
       </form>
