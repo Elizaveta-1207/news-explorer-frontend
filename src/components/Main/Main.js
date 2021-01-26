@@ -1,15 +1,15 @@
 import React from 'react';
-import SearchForm from '../SearchForm/SearchForm';
+import About from '../About/About';
+import Preloader from '../Preloader/Preloader';
+import NewsCardList from '../NewsCardList/NewsCardList';
 
-function Main() {
+function Main({ location }) {
   return (
-    <div className='main'>
-      <h1 className='main__title'>Что творится в мире?</h1>
-      <p className='main__text'>
-        Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.
-      </p>
-      <SearchForm />
-    </div>
+    <>
+      <Preloader />
+      <NewsCardList location={location} />
+      <About />
+    </>
   );
 }
 

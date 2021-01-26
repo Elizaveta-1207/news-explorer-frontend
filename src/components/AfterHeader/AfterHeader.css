@@ -1,4 +1,4 @@
-.main {
+.after-header {
   color: #fff;
   max-width: 608px;
   margin: 0 auto;
@@ -7,7 +7,7 @@
   padding: 80px 0;
 }
 
-.main__title {
+.after-header__title {
   font-family: 'Roboto Slab', Arial, sans-serif;
   font-size: 60px;
   line-height: 64px;
@@ -16,7 +16,7 @@
   font-weight: 400;
 }
 
-.main__text {
+.after-header__text {
   font-size: 18px;
   line-height: 24px;
   margin: 32px 0 0;

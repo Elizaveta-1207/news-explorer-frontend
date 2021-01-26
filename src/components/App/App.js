@@ -1,14 +1,11 @@
 import React from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
-// import { Switch, Route, Redirect, useHistory, useLocation } from 'react-router-dom';
 
 import Header from '../Header/Header';
+import AfterHeader from '../AfterHeader/AfterHeader';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
-import About from '../About/About';
-import Preloader from '../Preloader/Preloader';
-import NewsCardList from '../NewsCardList/NewsCardList';
 
 import './App.css';
 
@@ -22,16 +19,13 @@ function App() {
           <Route exact path='/'>
             <div className='page__container'>
               <Header location={location} />
-              <Main />
+              <AfterHeader />
             </div>
-            <Preloader />
-            <NewsCardList location={location} />
-            <About />
+            <Main location={location} />
           </Route>
           <Route path='/saved-news'>
             <Header location={location} />
-            <SavedNews />
-            <NewsCardList location={location} />
+            <SavedNews location={location} />
           </Route>
         </Switch>
         <Footer />

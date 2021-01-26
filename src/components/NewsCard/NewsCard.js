@@ -53,11 +53,15 @@ function NewsCard({ id, name, title, description, url, urlToImage, publishedAt, 
           </svg>
         )}
       </button>
+
       {/*если авторизирован и путь / => добавить класс невидимости */}
       {/* <div className={`news-card__tooltip ${isAuth && location.pathname === '/' && 'test'}`}> */}
       <div className={`news-card__tooltip`}>
         {location.pathname === '/' ? 'Войдите, чтобы сохранять статьи' : 'Убрать из сохранённых'}
       </div>
+
+      {location.pathname === '/saved-news' && <div className={`news-card__tag`}>Новость</div>}
+
       <img className='news-card__img' src={urlToImage} alt='News' />
       <div className='news-card__info'>
         <p className='news-card__date'>
