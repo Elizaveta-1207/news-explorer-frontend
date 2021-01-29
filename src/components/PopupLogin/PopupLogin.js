@@ -1,7 +1,7 @@
 import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
-function PopupLogin({ isOpen, onClose, onOverlay, changePopup }) {
+function PopupLogin({ isOpen, onClose, onOverlay, changePopup, handleLogin }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -51,7 +51,8 @@ function PopupLogin({ isOpen, onClose, onOverlay, changePopup }) {
           className='popup__input'
         />
         <span id='password-error'></span>
-        <button type='submit' className='popup__button' disabled>
+        {/* поставить disabled для деактивации кнопки */}
+        <button type='submit' className='popup__button' onClick={handleLogin}>
           Войти
         </button>
         <p className='popup__text'>

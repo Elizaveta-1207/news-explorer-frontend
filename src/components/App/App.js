@@ -27,12 +27,6 @@ function App() {
     setIsPopupLoginOpen(true);
   }
 
-  //   function openPopupLogin() {
-  //     setIsPopupLoginOpen(true);
-  //   }
-  //   function openPopupRegister() {
-  //     setIsPopupRegisterOpen(true);
-  //   }
   function openPopupInfo() {
     setIsPopupInfoOpen(true);
     setIsPopupRegisterOpen(false);
@@ -57,6 +51,15 @@ function App() {
       : setIsPopupLoginOpen(true);
   }
 
+  function handleLogin() {
+    setLoggedIn(true);
+    closeAllPopups();
+  }
+
+  function signOut() {
+    setLoggedIn(false);
+  }
+
   React.useEffect(() => {
     function handleEscClose(evt) {
       if (evt.key === 'Escape') {
@@ -75,7 +78,12 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <div className='page__container'>
-              <Header location={location} loggedIn={loggedIn} onAuth={handleOnAuthClick} />
+              <Header
+                location={location}
+                loggedIn={loggedIn}
+                onAuth={handleOnAuthClick}
+                signOut={signOut}
+              />
               <AfterHeader />
             </div>
             <Main location={location} />
@@ -85,6 +93,7 @@ function App() {
             component={SavedNewsPage}
             location={location}
             loggedIn={loggedIn}
+            signOut={signOut}
           />
         </Switch>
         <Footer />
@@ -94,6 +103,7 @@ function App() {
           onClose={closeAllPopups}
           onOverlay={handleOnOverlayClick}
           changePopup={changePopup}
+          handleLogin={handleLogin}
         />
 
         <PopupRegister
