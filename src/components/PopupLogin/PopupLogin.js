@@ -13,10 +13,20 @@ function PopupLogin({ isOpen, onClose, onOverlay, changePopup }) {
     }
   }
 
+  function handleSubmit(evt) {
+    evt.preventDefault();
+  }
+
   return (
     <PopupWithForm isOpen={isOpen} onClose={onClose} onOverlay={onOverlay}>
       <h2 className='popup__title'>Вход</h2>
-      <form action='#' name='popup-form' className={`popup__form popup-login__form`} noValidate>
+      <form
+        action='#'
+        name='popup-form'
+        className={`popup__form popup-login__form`}
+        onSubmit={handleSubmit}
+        noValidate
+      >
         <p className='popup__label'>E-mail</p>
         <input
           required

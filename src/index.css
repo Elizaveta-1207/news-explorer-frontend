@@ -15,6 +15,7 @@
 @import url('./components/PopupWithForm/PopupWithForm.css');
 @import url('./components/PopupLogin/PopupLogin.css');
 @import url('./components/PopupRegister/PopupRegister.css');
+@import url('./components/PopupInfo/PopupInfo.css');
 
 body {
   margin: 0;

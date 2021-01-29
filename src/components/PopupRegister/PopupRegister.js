@@ -1,7 +1,7 @@
 import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
-function PopupRegister({ isOpen, onClose, onOverlay, changePopup }) {
+function PopupRegister({ isOpen, onClose, onOverlay, changePopup, showInfoPopup }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [name, setName] = React.useState('');
@@ -16,10 +16,20 @@ function PopupRegister({ isOpen, onClose, onOverlay, changePopup }) {
     }
   }
 
+  function handleSubmit(evt) {
+    evt.preventDefault();
+  }
+
   return (
     <PopupWithForm isOpen={isOpen} onClose={onClose} onOverlay={onOverlay}>
       <h2 className='popup__title'>Регистрация</h2>
-      <form action='#' name='popup-form' className={`popup__form popup-login__form`} noValidate>
+      <form
+        action='#'
+        name='popup-form'
+        className={`popup__form popup-login__form`}
+        onSubmit={handleSubmit}
+        noValidate
+      >
         <p className='popup__label'>E-mail</p>
         <input
           required
@@ -55,7 +65,7 @@ function PopupRegister({ isOpen, onClose, onOverlay, changePopup }) {
         <span id='password-error' className='popup__error_visible popup__error_exist'>
           Такой пользователь уже есть
         </span>
-        <button type='submit' className='popup__button'>
+        <button type='submit' className='popup__button' onClick={showInfoPopup}>
           Зарегистрироваться
         </button>
         <p className='popup__text'>

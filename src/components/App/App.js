@@ -10,6 +10,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import SavedNewsPage from '../SavedNewsPage/SavedNewsPage';
 import PopupLogin from '../PopupLogin/PopupLogin';
 import PopupRegister from '../PopupRegister/PopupRegister';
+import PopupInfo from '../PopupInfo/PopupInfo';
 
 import './App.css';
 
@@ -20,14 +21,27 @@ function App() {
 
   const [isPopupLoginOpen, setIsPopupLoginOpen] = React.useState(false);
   const [isPopupRegisterOpen, setIsPopupRegisterOpen] = React.useState(false);
+  const [isPopupInfoOpen, setIsPopupInfoOpen] = React.useState(false);
 
   function handleOnAuthClick() {
     setIsPopupLoginOpen(true);
   }
 
+  //   function openPopupLogin() {
+  //     setIsPopupLoginOpen(true);
+  //   }
+  //   function openPopupRegister() {
+  //     setIsPopupRegisterOpen(true);
+  //   }
+  function openPopupInfo() {
+    setIsPopupInfoOpen(true);
+    setIsPopupRegisterOpen(false);
+  }
+
   function closeAllPopups() {
     setIsPopupLoginOpen(false);
     setIsPopupRegisterOpen(false);
+    setIsPopupInfoOpen(false);
   }
 
   function handleOnOverlayClick(evt) {
@@ -84,6 +98,14 @@ function App() {
 
         <PopupRegister
           isOpen={isPopupRegisterOpen}
+          onClose={closeAllPopups}
+          onOverlay={handleOnOverlayClick}
+          changePopup={changePopup}
+          showInfoPopup={openPopupInfo}
+        />
+
+        <PopupInfo
+          isOpen={isPopupInfoOpen}
           onClose={closeAllPopups}
           onOverlay={handleOnOverlayClick}
           changePopup={changePopup}
