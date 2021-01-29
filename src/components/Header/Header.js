@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Navigation from '../Navigation/Navigation';
 
-function Header({ location }) {
+function Header({ location, loggedIn }) {
   return (
     <header className={`header ${location.pathname === '/saved-news' ? 'header_logged' : ''}`}>
       <div className='header__container'>
@@ -15,7 +15,7 @@ function Header({ location }) {
         >
           NewsExplorer
         </Link>
-        <Navigation location={location} />
+        <Navigation location={location} loggedIn={loggedIn} />
       </div>
     </header>
   );
