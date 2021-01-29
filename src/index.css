@@ -12,6 +12,9 @@
 @import url('./components/NewsCardList/NewsCardList.css');
 @import url('./components/NewsCard/NewsCard.css');
 @import url('./components/SavedNewsHeader/SavedNewsHeader.css');
+@import url('./components/PopupWithForm/PopupWithForm.css');
+@import url('./components/PopupLogin/PopupLogin.css');
+@import url('./components/PopupRegister/PopupRegister.css');
 
 body {
   margin: 0;

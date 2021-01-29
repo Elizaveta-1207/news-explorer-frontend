@@ -1,0 +1,5 @@
+.popup__error_exist {
+  left: 50%;
+  padding: 17px 0 0;
+  transform: translateX(-50%);
+}

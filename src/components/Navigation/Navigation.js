@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Navigation({ location, loggedIn }) {
+function Navigation({ location, loggedIn, onAuth }) {
   return (
     <nav className='header__nav'>
       <Link
@@ -26,6 +26,7 @@ function Navigation({ location, loggedIn }) {
       )}
       <Link
         to='/'
+        onClick={!loggedIn && onAuth}
         className={`header__link header__link_auth ${
           location.pathname === '/saved-news' ? 'header__link_logged header__link_auth_logged' : ''
         }`}

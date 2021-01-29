@@ -8,12 +8,52 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import SavedNewsPage from '../SavedNewsPage/SavedNewsPage';
+import PopupLogin from '../PopupLogin/PopupLogin';
+import PopupRegister from '../PopupRegister/PopupRegister';
 
 import './App.css';
 
 function App() {
   const location = useLocation();
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  // загатовка для авторизации пользователя
+  const [loggedIn, setLoggedIn] = React.useState(false);
+
+  const [isPopupLoginOpen, setIsPopupLoginOpen] = React.useState(false);
+  const [isPopupRegisterOpen, setIsPopupRegisterOpen] = React.useState(false);
+
+  function handleOnAuthClick() {
+    setIsPopupLoginOpen(true);
+  }
+
+  function closeAllPopups() {
+    setIsPopupLoginOpen(false);
+    setIsPopupRegisterOpen(false);
+  }
+
+  function handleOnOverlayClick(evt) {
+    if (evt.target === evt.currentTarget) {
+      closeAllPopups();
+    }
+  }
+
+  function changePopup(evt) {
+    closeAllPopups();
+    evt.target.textContent === 'Зарегистрироваться'
+      ? setIsPopupRegisterOpen(true)
+      : setIsPopupLoginOpen(true);
+  }
+
+  React.useEffect(() => {
+    function handleEscClose(evt) {
+      if (evt.key === 'Escape') {
+        closeAllPopups();
+      }
+    }
+    document.addEventListener('keydown', handleEscClose);
+    return () => {
+      document.removeEventListener('keydown', handleEscClose);
+    };
+  });
 
   return (
     <>
@@ -21,7 +61,7 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <div className='page__container'>
-              <Header location={location} loggedIn={loggedIn} />
+              <Header location={location} loggedIn={loggedIn} onAuth={handleOnAuthClick} />
               <AfterHeader />
             </div>
             <Main location={location} />
@@ -32,11 +72,22 @@ function App() {
             location={location}
             loggedIn={loggedIn}
           />
-          {/* <Header location={location} />
-            <SavedNews location={location} />
-          </ProtectedRoute> */}
         </Switch>
         <Footer />
+
+        <PopupLogin
+          isOpen={isPopupLoginOpen}
+          onClose={closeAllPopups}
+          onOverlay={handleOnOverlayClick}
+          changePopup={changePopup}
+        />
+
+        <PopupRegister
+          isOpen={isPopupRegisterOpen}
+          onClose={closeAllPopups}
+          onOverlay={handleOnOverlayClick}
+          changePopup={changePopup}
+        />
       </div>
     </>
   );
