@@ -1,12 +1,16 @@
 import React from 'react';
 import NotFoundIcon from '../../images/not-found-icon.png';
 
-function Preloader() {
+function Preloader({ isPrelodaerOpen }) {
   return (
     //для проверки в следующей строке добавить класс preloader__visible
-    <section className='preloader'>
+    <section className={`preloader ${isPrelodaerOpen && 'preloader__visible'}`}>
       {/* одновременно с первым комментарием для проверки в следующей строке добавить класс circle-preloader__container_visible */}
-      <div className='circle-preloader__container '>
+      <div
+        className={`circle-preloader__container ${
+          isPrelodaerOpen && 'circle-preloader__container_visible'
+        }`}
+      >
         <div className='circle-preloader'></div>
         <p className='preloader__text'>Идет поиск новостей...</p>
       </div>

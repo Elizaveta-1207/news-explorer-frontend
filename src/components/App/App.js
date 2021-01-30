@@ -23,6 +23,13 @@ function App() {
   const [isPopupRegisterOpen, setIsPopupRegisterOpen] = React.useState(false);
   const [isPopupInfoOpen, setIsPopupInfoOpen] = React.useState(false);
 
+  const [isPrelodaerOpen, setisPrelodaerOpen] = React.useState(false);
+
+  function handleSearch() {
+    setisPrelodaerOpen(true);
+    setTimeout(() => setisPrelodaerOpen(false), 1000);
+  }
+
   function handleOnAuthClick() {
     setIsPopupLoginOpen(true);
   }
@@ -84,9 +91,9 @@ function App() {
                 onAuth={handleOnAuthClick}
                 signOut={signOut}
               />
-              <AfterHeader />
+              <AfterHeader handleSearch={handleSearch} />
             </div>
-            <Main location={location} />
+            <Main location={location} isPrelodaerOpen={isPrelodaerOpen} />
           </Route>
           <ProtectedRoute
             path='/saved-news'

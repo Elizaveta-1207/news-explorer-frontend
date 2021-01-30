@@ -5,6 +5,14 @@ function PopupLogin({ isOpen, onClose, onOverlay, changePopup, handleLogin }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
+  // подготовка к валидации
+  //   const [errors, setErrors] = React.useState({
+  //     emailErr: '',
+  //     passwordErr: '',
+  //   });
+  //   const [isValid, setIsValid] = React.useState(true);
+  //   const [showError, setShowError] = React.useState({});
+
   function handleChange(evt) {
     if (evt.target.name === 'Email') {
       setEmail(evt.target.value);
