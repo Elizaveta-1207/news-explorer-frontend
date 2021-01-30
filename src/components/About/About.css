@@ -2,7 +2,9 @@
   display: flex;
   padding: 80px 104px;
   margin: 0 auto;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: center;
+  align-items: center;
 }
 
 .about__avatar {
@@ -21,7 +23,7 @@
   margin: 0;
   font-family: 'Roboto Slab', Arial, sans-serif;
   font-size: 40px;
-  line-height: 46px;
+  line-height: 1.2;
   font-style: normal;
   font-weight: 400;
 }
@@ -31,4 +33,35 @@
   line-height: 24px;
   font-style: normal;
   font-weight: 400;
+}
+
+@media screen and (max-width: 1279px) {
+  .about__avatar {
+    width: 340px;
+    height: 340px;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .about {
+    padding: 40px 40px 61px;
+    align-items: center;
+  }
+
+  .about__avatar {
+    width: 232px;
+    height: 232px;
+  }
+
+  .about__info {
+    margin-left: 32px;
+    max-width: 424px;
+  }
+  .about__title {
+    font-size: 30px;
+    line-height: 1.3;
+  }
+  .about__text {
+    margin-top: 16px;
+  }
 }

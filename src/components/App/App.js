@@ -25,6 +25,8 @@ function App() {
 
   const [isPrelodaerOpen, setisPrelodaerOpen] = React.useState(false);
 
+  const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
+
   function handleSearch() {
     setisPrelodaerOpen(true);
     setTimeout(() => setisPrelodaerOpen(false), 1000);
@@ -79,6 +81,12 @@ function App() {
     };
   });
 
+  React.useEffect(() => {
+    window.addEventListener('resize', (evt) => {
+      setScreenWidth(evt.target.innerWidth);
+    });
+  }, []);
+
   return (
     <>
       <div className='page'>
@@ -103,7 +111,7 @@ function App() {
             signOut={signOut}
           />
         </Switch>
-        <Footer />
+        <Footer screenWidth={screenWidth} />
 
         <PopupLogin
           isOpen={isPopupLoginOpen}

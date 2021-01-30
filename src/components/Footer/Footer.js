@@ -2,8 +2,9 @@ import React from 'react';
 
 import GhIcon from '../../images/gh-icon.png';
 import FbIcon from '../../images/fb-icon.png';
+import FbIcon2 from '../../images/fb-icon2.png';
 
-function Footer() {
+function Footer({ screenWidth }) {
   return (
     <footer className='footer'>
       <p className='footer__copyright'>&copy;2020 Supersite, Powered by News API</p>
@@ -36,7 +37,11 @@ function Footer() {
             href='https://www.facebook.com/'
             className='footer__social'
           >
-            <img src={FbIcon} className='footer__icon' alt='facebook link' />
+            <img
+              src={screenWidth < 1024 && screenWidth > 424 ? FbIcon2 : FbIcon}
+              className='footer__icon'
+              alt='facebook link'
+            />
           </a>
         </div>
       </nav>

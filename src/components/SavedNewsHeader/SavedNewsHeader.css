@@ -1,7 +1,7 @@
 .news-header {
-  padding: 0;
+  padding: 40px 20px 56px;
   max-width: 1232px;
-  margin: 40px auto 56px;
+  margin: 0 auto;
 }
 
 .news-header__heading {
@@ -35,4 +35,22 @@
 
 .news-header__tag {
   font-weight: 500;
+}
+
+@media screen and (max-width: 1023px) {
+  .news-header {
+    padding: 24px 40px 32px;
+  }
+  .news-header__heading {
+    font-size: 14px;
+  }
+  .news-header__info {
+    font-size: 30px;
+    max-width: 336px;
+    margin-top: 16px;
+  }
+  .news-header__tags {
+    font-size: 14px;
+    margin-top: 16px;
+  }
 }

@@ -10,7 +10,7 @@
 .after-header__title {
   font-family: 'Roboto Slab', Arial, sans-serif;
   font-size: 60px;
-  line-height: 64px;
+  line-height: 1.1;
   margin: 0;
   font-style: normal;
   font-weight: 400;
@@ -21,4 +21,18 @@
   line-height: 24px;
   margin: 32px 0 0;
   max-width: 580px;
+}
+
+@media screen and (max-width: 1023px) {
+  .after-header {
+    max-width: 452px;
+    padding: 38px 0 48px;
+  }
+  .after-header__title {
+    font-size: 36px;
+    max-width: 385px;
+  }
+  .after-header__text {
+    margin-top: 16px;
+  }
 }

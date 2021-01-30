@@ -63,3 +63,14 @@
 .after-header__btn:active {
   background-color: #2a65cc;
 }
+
+@media screen and (max-width: 1023px) {
+  .after-header__form {
+    margin-top: 48px;
+    height: 56px;
+  }
+
+  .after-header__btn {
+    width: calc(160 * 100% / 452);
+  }
+}
