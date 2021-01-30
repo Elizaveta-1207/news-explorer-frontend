@@ -38,7 +38,7 @@ function Footer({ screenWidth }) {
             className='footer__social'
           >
             <img
-              src={screenWidth < 1024 && screenWidth > 424 ? FbIcon2 : FbIcon}
+              src={screenWidth < 1024 && screenWidth > 767 ? FbIcon2 : FbIcon}
               className='footer__icon'
               alt='facebook link'
             />

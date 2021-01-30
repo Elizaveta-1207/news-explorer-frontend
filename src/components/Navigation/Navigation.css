@@ -66,9 +66,56 @@
   fill: #1a1b22;
 }
 
+.header__burger {
+  /* display: none; */
+  background-image: url('../../images/burger-btn.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  padding: 0;
+  /* transform: rotate(45deg); */
+
+  /* position: absolute;
+  top: 2px;
+  right: 20px; */
+
+  width: 24px;
+  height: 24px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  display: none;
+}
+
+.header__burger:hover {
+  opacity: 0.6;
+}
+
+.header__burger:focus {
+  outline: none;
+  opacity: 0.6;
+}
+
 @media screen and (max-width: 1023px) {
   .header__nav {
     font-size: 16px;
     line-height: 1.5;
+    height: 66px;
+  }
+  .header__link {
+    padding: 22px 0 17px;
+  }
+  .header__link_auth {
+    padding: 8px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header__nav {
+    display: none;
+  }
+  .header__burger {
+    display: block;
   }
 }

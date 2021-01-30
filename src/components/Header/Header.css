@@ -22,7 +22,7 @@
   font-weight: 700;
   font-style: normal;
   font-size: 20px;
-  line-height: 24px;
+  line-height: 1.2;
   padding-bottom: 3px;
 }
 
@@ -37,8 +37,23 @@
   }
 }
 
-/* @media screen and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .header__container {
-    padding: 28px calc(27 * 100% / 320) 31px;
+    height: 56px;
+    padding-left: 18px;
+    padding-right: 18px;
   }
-} */
+  .header__logo {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 424px) {
+  .header__logo {
+    font-size: 16px;
+  }
+  .header__container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

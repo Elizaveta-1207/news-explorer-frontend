@@ -7,7 +7,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  height: 64px;
+  /* height: 64px; */
 }
 
 .after-header__input {
@@ -20,6 +20,7 @@
   font-size: 16px;
   line-height: 22px;
   transition: all 0.7s ease;
+  height: 64px;
 }
 
 .after-header__input::placeholder {
@@ -67,10 +68,27 @@
 @media screen and (max-width: 1023px) {
   .after-header__form {
     margin-top: 48px;
+  }
+  .after-header__input {
     height: 56px;
   }
-
   .after-header__btn {
     width: calc(160 * 100% / 452);
+  }
+}
+
+@media screen and (max-width: 424px) {
+  .after-header__form {
+    margin-top: 122px;
+    background-color: transparent;
+    flex-direction: column;
+  }
+  .after-header__input {
+    width: auto;
+  }
+  .after-header__btn {
+    width: auto;
+    height: 56px;
+    margin-top: 16px;
   }
 }

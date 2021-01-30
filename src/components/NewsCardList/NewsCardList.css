@@ -87,3 +87,23 @@
     margin-top: 32px;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .news__container {
+    padding: 32px 16px;
+  }
+  .news__title {
+    margin-bottom: 24px;
+  }
+
+  .news__list {
+    grid-template-columns: repeat(auto-fit, 288px);
+    grid-gap: 10px;
+  }
+
+  .news__show-btn {
+    width: 288px;
+    height: 56px;
+    margin-top: 16px;
+  }
+}
