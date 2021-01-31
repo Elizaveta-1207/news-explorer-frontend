@@ -7,6 +7,11 @@
   line-height: 1.2;
 }
 
+.popup__form {
+  box-sizing: border-box;
+  position: relative;
+}
+
 .popup__label {
   margin: 0;
   padding: 0 0 0 1px;
@@ -119,4 +124,14 @@
   color: #ff0000;
   position: absolute;
   padding-left: 1px;
+  width: 100%;
+}
+
+@media screen and (max-width: 424px) {
+  .popup__label:first-child {
+    margin-top: 22px;
+  }
+  .popup__button {
+    margin-top: 26px;
+  }
 }

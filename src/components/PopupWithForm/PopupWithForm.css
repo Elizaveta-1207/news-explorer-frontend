@@ -67,3 +67,34 @@
   outline: none;
   opacity: 0.6;
 }
+
+@media screen and (max-width: 767px) {
+  .popup__container {
+    padding: 30px;
+  }
+}
+
+@media screen and (max-width: 424px) {
+  .popup__container {
+    padding: 24px;
+  }
+  .popup {
+    padding: 0;
+    background-image: url(/src/images/header-background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  .popup__container {
+    padding: 16px;
+    width: 100%;
+    height: 100%;
+    top: 56px;
+    justify-content: flex-start;
+  }
+  .popup__close-button {
+    right: 16px;
+    width: 24px;
+    height: 24px;
+  }
+}
