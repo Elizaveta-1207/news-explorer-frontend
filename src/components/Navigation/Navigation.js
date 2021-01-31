@@ -1,11 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Navigation({ location, loggedIn, onAuth, signOut }) {
+function Navigation({ location, loggedIn, onAuth, signOut, isBurgerOpen, openBurger }) {
   return (
     <>
-      <button className='header__burger'></button>
-      <nav className='header__nav'>
+      <button
+        className={`${isBurgerOpen ? 'header__close' : 'header__burger'} ${
+          location.pathname === '/saved-news' && !isBurgerOpen ? 'header__burger_black' : ''
+        }`}
+        onClick={openBurger}
+      ></button>
+      <nav className={`header__nav ${isBurgerOpen && 'header__nav_opened'}`}>
+        {/* <nav className={`header__nav `}> */}
         <Link
           to='/'
           className={`header__link ${
@@ -46,8 +52,10 @@ function Navigation({ location, loggedIn, onAuth, signOut }) {
               xmlns='http://www.w3.org/2000/svg'
             >
               <path
-                className={`header__path ${
-                  location.pathname === '/saved-news' ? 'header__path_logged' : ''
+                className={` ${
+                  location.pathname === '/saved-news' && !isBurgerOpen
+                    ? 'header__path_logged'
+                    : 'header__path'
                 }`}
                 fillRule='evenodd'
                 clipRule='evenodd'

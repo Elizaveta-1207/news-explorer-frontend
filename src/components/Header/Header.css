@@ -38,11 +38,28 @@
 }
 
 @media screen and (max-width: 767px) {
+  .header__fixed {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: #1a1b22;
+
+    /* background-color: #00000080;
+    height: 100%; */
+    z-index: 2;
+  }
+
   .header__container {
     height: 56px;
     padding-left: 18px;
     padding-right: 18px;
   }
+
+  /* .header__burger-open {
+    background-color: #1a1b22;
+  } */
+
   .header__logo {
     font-size: 18px;
   }

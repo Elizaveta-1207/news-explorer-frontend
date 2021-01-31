@@ -26,6 +26,7 @@ function App() {
   const [isPrelodaerOpen, setisPrelodaerOpen] = React.useState(false);
 
   const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
+  const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
 
   function handleSearch() {
     setisPrelodaerOpen(true);
@@ -34,6 +35,10 @@ function App() {
 
   function handleOnAuthClick() {
     setIsPopupLoginOpen(true);
+  }
+
+  function openBurger() {
+    setIsBurgerOpen(!isBurgerOpen);
   }
 
   function openPopupInfo() {
@@ -90,6 +95,7 @@ function App() {
   return (
     <>
       <div className='page'>
+        <div className={`${isBurgerOpen && 'page__shadow'} `}></div>
         <Switch>
           <Route exact path='/'>
             <div className='page__container'>
@@ -98,10 +104,17 @@ function App() {
                 loggedIn={loggedIn}
                 onAuth={handleOnAuthClick}
                 signOut={signOut}
+                isBurgerOpen={isBurgerOpen}
+                openBurger={openBurger}
               />
               <AfterHeader handleSearch={handleSearch} />
             </div>
-            <Main location={location} isPrelodaerOpen={isPrelodaerOpen} />
+            <Main
+              location={location}
+              isPrelodaerOpen={isPrelodaerOpen}
+              loggedIn={loggedIn}
+              screenWidth={screenWidth}
+            />
           </Route>
           <ProtectedRoute
             path='/saved-news'
@@ -109,6 +122,9 @@ function App() {
             location={location}
             loggedIn={loggedIn}
             signOut={signOut}
+            isBurgerOpen={isBurgerOpen}
+            openBurger={openBurger}
+            screenWidth={screenWidth}
           />
         </Switch>
         <Footer screenWidth={screenWidth} />

@@ -1,6 +1,17 @@
 import React from 'react';
 
-function NewsCard({ id, name, title, description, url, urlToImage, publishedAt, location }) {
+function NewsCard({
+  id,
+  name,
+  title,
+  description,
+  url,
+  urlToImage,
+  publishedAt,
+  location,
+  loggedIn,
+  screenWidth,
+}) {
   const [isSaved, setIsSaved] = React.useState(false);
   //   const [isAuth, setIsAuth] = React.useState(true);
 
@@ -56,7 +67,11 @@ function NewsCard({ id, name, title, description, url, urlToImage, publishedAt, 
 
       {/*если авторизирован и путь / => добавить класс невидимости */}
       {/* <div className={`news-card__tooltip ${isAuth && location.pathname === '/' && 'test'}`}> */}
-      <div className={`news-card__tooltip`}>
+      <div
+        className={`news-card__tooltip ${
+          loggedIn && location.pathname === '/' && 'news-card__tooltip_hidden'
+        } ${screenWidth < 768 && 'news-card__tooltip_hidden'}`}
+      >
         {location.pathname === '/' ? 'Войдите, чтобы сохранять статьи' : 'Убрать из сохранённых'}
       </div>
 

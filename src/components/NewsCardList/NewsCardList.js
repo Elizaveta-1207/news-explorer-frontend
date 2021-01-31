@@ -2,7 +2,7 @@ import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import News from '../../utils/News.json';
 
-function NewsCardList({ location, isPrelodaerOpen }) {
+function NewsCardList({ location, isPrelodaerOpen, loggedIn, screenWidth }) {
   return (
     <>
       {!isPrelodaerOpen && (
@@ -23,6 +23,8 @@ function NewsCardList({ location, isPrelodaerOpen }) {
                   name={props.source.name}
                   {...props}
                   location={location}
+                  loggedIn={loggedIn}
+                  screenWidth={screenWidth}
                 />
               ))}
             </ul>
