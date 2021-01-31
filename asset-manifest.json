@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "./static/css/main.3f5176a1.chunk.css",
-    "main.js": "./static/js/main.e11042b9.chunk.js",
-    "main.js.map": "./static/js/main.e11042b9.chunk.js.map",
-    "runtime-main.js": "./static/js/runtime-main.0adecd93.js",
-    "runtime-main.js.map": "./static/js/runtime-main.0adecd93.js.map",
-    "static/js/2.2738e99e.chunk.js": "./static/js/2.2738e99e.chunk.js",
-    "static/js/2.2738e99e.chunk.js.map": "./static/js/2.2738e99e.chunk.js.map",
-    "index.html": "./index.html",
-    "static/css/main.3f5176a1.chunk.css.map": "./static/css/main.3f5176a1.chunk.css.map",
-    "static/js/2.2738e99e.chunk.js.LICENSE.txt": "./static/js/2.2738e99e.chunk.js.LICENSE.txt",
-    "static/media/avatar.d9f39d05.jpg": "./static/media/avatar.d9f39d05.jpg",
-    "static/media/index.css": "./static/media/sourcesanspro-regular.95f3ed41.woff",
-    "static/media/App.css": "./static/media/header-background.18229714.png"
+    "main.css": "/news-explorer-frontend/static/css/main.25f10e09.chunk.css",
+    "main.js": "/news-explorer-frontend/static/js/main.e11042b9.chunk.js",
+    "main.js.map": "/news-explorer-frontend/static/js/main.e11042b9.chunk.js.map",
+    "runtime-main.js": "/news-explorer-frontend/static/js/runtime-main.4b6e19df.js",
+    "runtime-main.js.map": "/news-explorer-frontend/static/js/runtime-main.4b6e19df.js.map",
+    "static/js/2.2738e99e.chunk.js": "/news-explorer-frontend/static/js/2.2738e99e.chunk.js",
+    "static/js/2.2738e99e.chunk.js.map": "/news-explorer-frontend/static/js/2.2738e99e.chunk.js.map",
+    "index.html": "/news-explorer-frontend/index.html",
+    "static/css/main.25f10e09.chunk.css.map": "/news-explorer-frontend/static/css/main.25f10e09.chunk.css.map",
+    "static/js/2.2738e99e.chunk.js.LICENSE.txt": "/news-explorer-frontend/static/js/2.2738e99e.chunk.js.LICENSE.txt",
+    "static/media/avatar.d9f39d05.jpg": "/news-explorer-frontend/static/media/avatar.d9f39d05.jpg",
+    "static/media/index.css": "/news-explorer-frontend/static/media/sourcesanspro-regular.95f3ed41.woff",
+    "static/media/App.css": "/news-explorer-frontend/static/media/header-background.18229714.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.0adecd93.js",
+    "static/js/runtime-main.4b6e19df.js",
     "static/js/2.2738e99e.chunk.js",
-    "static/css/main.3f5176a1.chunk.css",
+    "static/css/main.25f10e09.chunk.css",
     "static/js/main.e11042b9.chunk.js"
   ]
 }
