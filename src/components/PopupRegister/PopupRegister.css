@@ -1,0 +1,10 @@
+.popup__error_exist {
+  padding: 17px 0 0;
+  text-align: center;
+}
+
+@media screen and (max-width: 424px) {
+  .popup__error_exist {
+    padding-top: 9px;
+  }
+}

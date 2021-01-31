@@ -1,0 +1,10 @@
+.popup__text-login {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.2;
+  cursor: pointer;
+  color: #2f71e5;
+  margin: 14px 0 0;
+}
