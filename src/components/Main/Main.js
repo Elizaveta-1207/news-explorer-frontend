@@ -3,7 +3,7 @@ import About from '../About/About';
 import Preloader from '../Preloader/Preloader';
 import NewsCardList from '../NewsCardList/NewsCardList';
 
-function Main({ location, isPrelodaerOpen, loggedIn, screenWidth }) {
+function Main({ location, isPrelodaerOpen, loggedIn, screenWidth, cards }) {
   return (
     <>
       <Preloader isPrelodaerOpen={isPrelodaerOpen} />
@@ -12,6 +12,7 @@ function Main({ location, isPrelodaerOpen, loggedIn, screenWidth }) {
         isPrelodaerOpen={isPrelodaerOpen}
         loggedIn={loggedIn}
         screenWidth={screenWidth}
+        cards={cards}
       />
       <About />
     </>

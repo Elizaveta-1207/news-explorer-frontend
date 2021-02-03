@@ -2,7 +2,7 @@ import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import News from '../../utils/News.json';
 
-function NewsCardList({ location, isPrelodaerOpen, loggedIn, screenWidth }) {
+function NewsCardList({ location, isPrelodaerOpen, loggedIn, screenWidth, cards }) {
   return (
     <>
       {!isPrelodaerOpen && (
@@ -16,11 +16,13 @@ function NewsCardList({ location, isPrelodaerOpen, loggedIn, screenWidth }) {
             <ul
               className={`news__list ${location.pathname === '/saved-news' && 'news__list_saved'}`}
             >
-              {News.articles.map((props) => (
+              {/* {News.articles.map((props) => ( */}
+              {cards.map((props, index) => (
                 <NewsCard
-                  key={props.source.id}
-                  id={props.source.id}
-                  name={props.source.name}
+                  key={index}
+                  //   key={props.id}
+                  //   id={props.source.id}
+                  name={props.name}
                   {...props}
                   location={location}
                   loggedIn={loggedIn}

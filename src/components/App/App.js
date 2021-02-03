@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+
 import Header from '../Header/Header';
 import AfterHeader from '../AfterHeader/AfterHeader';
 import Main from '../Main/Main';
@@ -13,6 +15,8 @@ import PopupRegister from '../PopupRegister/PopupRegister';
 import PopupInfo from '../PopupInfo/PopupInfo';
 
 import './App.css';
+
+import getNews from '../../utils/NewsApi';
 
 function App() {
   const location = useLocation();
@@ -27,6 +31,10 @@ function App() {
 
   const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
   const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
+
+  const [currentUser, setCurrentUser] = React.useState({});
+
+  const [cards, setCards] = React.useState([]);
 
   function handleSearch() {
     setisPrelodaerOpen(true);
@@ -75,6 +83,16 @@ function App() {
   }
 
   React.useEffect(() => {
+    getNews('apple')
+      .then((results) => {
+        // console.log(results);
+        // setupCards(results);
+        setCards(results.articles);
+      })
+      .catch((err) => console.log(`Error ${err}`));
+  }, []);
+
+  React.useEffect(() => {
     function handleEscClose(evt) {
       if (evt.key === 'Escape') {
         closeAllPopups();
@@ -93,7 +111,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
         <div className={`${isBurgerOpen && 'page__shadow'} `}></div>
         <Switch>
@@ -114,6 +132,7 @@ function App() {
               isPrelodaerOpen={isPrelodaerOpen}
               loggedIn={loggedIn}
               screenWidth={screenWidth}
+              cards={cards}
             />
           </Route>
           <ProtectedRoute
@@ -152,7 +171,7 @@ function App() {
           changePopup={changePopup}
         />
       </div>
-    </>
+    </CurrentUserContext.Provider>
   );
 }
 
