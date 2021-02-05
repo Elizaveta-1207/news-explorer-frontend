@@ -10,9 +10,9 @@ const fromDate = inWeek.toISOString();
 const NEWS_OPTIONS = {
   newsApi: 'https://newsapi.org/v2/everything',
   apiKey: '5274598129cb4726b1e7d60d36a7e7a6',
-  from: toDate.slice(0, 10),
-  to: fromDate.slice(0, 10),
-  pageSize: 3,
+  to: toDate.slice(0, 10),
+  from: fromDate.slice(0, 10),
+  pageSize: 100,
 };
 
 const checkResponse = (res) => (res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));

@@ -29,6 +29,7 @@
 
 .after-header__input:focus {
   outline: none;
+  /* box-shadow: 0 -5px 10px 0 #fff; */
 }
 
 .after-header__input:autofill {

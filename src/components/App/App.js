@@ -27,7 +27,7 @@ function App() {
   const [isPopupRegisterOpen, setIsPopupRegisterOpen] = React.useState(false);
   const [isPopupInfoOpen, setIsPopupInfoOpen] = React.useState(false);
 
-  const [isPrelodaerOpen, setisPrelodaerOpen] = React.useState(false);
+  const [isPrelodaerOpen, setIsPrelodaerOpen] = React.useState(false);
 
   const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
   const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
@@ -35,10 +35,30 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
 
   const [cards, setCards] = React.useState([]);
+  const [firstOpen, setFirstOpen] = React.useState(true);
+  const [newsRow, setNewsRow] = React.useState(0);
 
-  function handleSearch() {
-    setisPrelodaerOpen(true);
-    setTimeout(() => setisPrelodaerOpen(false), 1000);
+  // временная функция для прелоадера
+  //   function handleSearch() {
+  //     setIsPrelodaerOpen(true);
+  //     setTimeout(() => setIsPrelodaerOpen(false), 1000);
+  //   }
+
+  function handleSearch(keyword) {
+    setIsPrelodaerOpen(true);
+    getNews(keyword)
+      .then((results) => {
+        setFirstOpen(false);
+        setIsPrelodaerOpen(false);
+        setCards(results.articles);
+
+        setNewsRow(0);
+      })
+      .catch((err) => console.log(`Error ${err}`));
+  }
+
+  function handleShowMore() {
+    setNewsRow(newsRow + 1);
   }
 
   function handleOnAuthClick() {
@@ -82,15 +102,13 @@ function App() {
     setLoggedIn(false);
   }
 
-  React.useEffect(() => {
-    getNews('apple')
-      .then((results) => {
-        // console.log(results);
-        // setupCards(results);
-        setCards(results.articles);
-      })
-      .catch((err) => console.log(`Error ${err}`));
-  }, []);
+  //   React.useEffect(() => {
+  //     getNews('президент')
+  //       .then((results) => {
+  //         setCards(results.articles);
+  //       })
+  //       .catch((err) => console.log(`Error ${err}`));
+  //   }, []);
 
   React.useEffect(() => {
     function handleEscClose(evt) {
@@ -133,6 +151,9 @@ function App() {
               loggedIn={loggedIn}
               screenWidth={screenWidth}
               cards={cards}
+              firstOpen={firstOpen}
+              handleShowMore={handleShowMore}
+              newsRow={newsRow}
             />
           </Route>
           <ProtectedRoute
@@ -144,6 +165,8 @@ function App() {
             isBurgerOpen={isBurgerOpen}
             openBurger={openBurger}
             screenWidth={screenWidth}
+            // временно
+            cards={cards}
           />
         </Switch>
         <Footer screenWidth={screenWidth} />

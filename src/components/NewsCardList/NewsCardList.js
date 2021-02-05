@@ -1,8 +1,17 @@
 import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
-import News from '../../utils/News.json';
+// import News from '../../utils/News.json';
 
-function NewsCardList({ location, isPrelodaerOpen, loggedIn, screenWidth, cards }) {
+function NewsCardList({
+  location,
+  isPrelodaerOpen,
+  loggedIn,
+  screenWidth,
+  cards,
+  handleShowMore,
+  newsRow,
+}) {
+  const showNewsRows = location.pathname === '/' && cards.slice(0, (newsRow + 1) * 3);
   return (
     <>
       {!isPrelodaerOpen && (
@@ -16,13 +25,13 @@ function NewsCardList({ location, isPrelodaerOpen, loggedIn, screenWidth, cards 
             <ul
               className={`news__list ${location.pathname === '/saved-news' && 'news__list_saved'}`}
             >
-              {/* {News.articles.map((props) => ( */}
-              {cards.map((props, index) => (
+              {/* {News.articles.map((props, index) => ( */}
+              {showNewsRows.map((props, index) => (
                 <NewsCard
                   key={index}
                   //   key={props.id}
                   //   id={props.source.id}
-                  name={props.name}
+                  name={props.source.name}
                   {...props}
                   location={location}
                   loggedIn={loggedIn}
@@ -30,7 +39,11 @@ function NewsCardList({ location, isPrelodaerOpen, loggedIn, screenWidth, cards 
                 />
               ))}
             </ul>
-            {location.pathname === '/' && <button className='news__show-btn'>Показать еще</button>}
+            {location.pathname === '/' && (
+              <button className='news__show-btn' onClick={handleShowMore}>
+                Показать еще
+              </button>
+            )}
           </div>
         </section>
       )}

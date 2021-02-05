@@ -1,7 +1,6 @@
 import React from 'react';
 
 function NewsCard({
-  id,
   name,
   title,
   description,
@@ -16,17 +15,19 @@ function NewsCard({
   //   const [isAuth, setIsAuth] = React.useState(true);
 
   function handleSaved() {
-    isSaved ? setIsSaved(false) : setIsSaved(true);
+    if (loggedIn) {
+      isSaved ? setIsSaved(false) : setIsSaved(true);
+    }
   }
 
   return (
     <li className='news-card'>
       <button
         className={`news-card__marker ${
-          isSaved && location.pathname === '/'
+          isSaved && location.pathname === '/' && loggedIn
             ? 'news-card__marker_saved'
             : 'news-card__marker_unsaved'
-        }`}
+        } ${!loggedIn ? 'news-card__marker_unlogged' : ''}`}
         type='button'
         onClick={handleSaved}
       >
@@ -39,7 +40,7 @@ function NewsCard({
             xmlns='http://www.w3.org/2000/svg'
           >
             <path
-              className='news-card__path_save'
+              className={`news-card__path_save ${!loggedIn ? 'news-card__path_unlogged' : ''}`}
               d='M6.38218 12.7137L1 16.9425V1L13 1V16.9425L7.61782 12.7137L7 12.2283L6.38218 12.7137Z'
               stroke='#B6BCBF'
               strokeWidth='2'
