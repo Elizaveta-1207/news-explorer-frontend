@@ -7,11 +7,11 @@ function NewsCardList({
   isPrelodaerOpen,
   loggedIn,
   screenWidth,
-  cards,
+  articles,
   handleShowMore,
   newsRow,
 }) {
-  const showNewsRows = location.pathname === '/' && cards.slice(0, (newsRow + 1) * 3);
+  const showNewsRows = location.pathname === '/' && articles.slice(0, (newsRow + 1) * 3);
   return (
     <>
       {!isPrelodaerOpen && (
@@ -26,18 +26,19 @@ function NewsCardList({
               className={`news__list ${location.pathname === '/saved-news' && 'news__list_saved'}`}
             >
               {/* {News.articles.map((props, index) => ( */}
-              {showNewsRows.map((props, index) => (
-                <NewsCard
-                  key={index}
-                  //   key={props.id}
-                  //   id={props.source.id}
-                  name={props.source.name}
-                  {...props}
-                  location={location}
-                  loggedIn={loggedIn}
-                  screenWidth={screenWidth}
-                />
-              ))}
+              {location.pathname === '/' &&
+                showNewsRows.map((props, index) => (
+                  <NewsCard
+                    key={index}
+                    //   key={props.id}
+                    //   id={props.source.id}
+                    name={props.source.name}
+                    {...props}
+                    location={location}
+                    loggedIn={loggedIn}
+                    screenWidth={screenWidth}
+                  />
+                ))}
             </ul>
             {location.pathname === '/' && (
               <button className='news__show-btn' onClick={handleShowMore}>

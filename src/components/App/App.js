@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
@@ -17,6 +17,14 @@ import PopupInfo from '../PopupInfo/PopupInfo';
 import './App.css';
 
 import getNews from '../../utils/NewsApi';
+import {
+  register,
+  authorize,
+  getUserMe,
+  getArticles,
+  createArticle,
+  deleteArticle,
+} from '../../utils/MainApi';
 
 function App() {
   const location = useLocation();
@@ -26,6 +34,11 @@ function App() {
   const [isPopupLoginOpen, setIsPopupLoginOpen] = React.useState(false);
   const [isPopupRegisterOpen, setIsPopupRegisterOpen] = React.useState(false);
   const [isPopupInfoOpen, setIsPopupInfoOpen] = React.useState(false);
+  const [dataInfoTool, setDataInfoTool] = React.useState({
+    title: '',
+  });
+
+  //   const [userName, setUserName] = React.useState('');
 
   const [isPrelodaerOpen, setIsPrelodaerOpen] = React.useState(false);
 
@@ -34,10 +47,11 @@ function App() {
 
   const [currentUser, setCurrentUser] = React.useState({});
 
-  const [cards, setCards] = React.useState([]);
+  const [articles, setArticles] = React.useState([]);
   const [firstOpen, setFirstOpen] = React.useState(true);
   const [newsRow, setNewsRow] = React.useState(0);
 
+  const history = useHistory();
   // временная функция для прелоадера
   //   function handleSearch() {
   //     setIsPrelodaerOpen(true);
@@ -48,9 +62,10 @@ function App() {
     setIsPrelodaerOpen(true);
     getNews(keyword)
       .then((results) => {
+        localStorage.setItem('news', JSON.stringify(results.articles));
         setFirstOpen(false);
         setIsPrelodaerOpen(false);
-        setCards(results.articles);
+        setArticles(results.articles);
 
         setNewsRow(0);
       })
@@ -93,22 +108,104 @@ function App() {
       : setIsPopupLoginOpen(true);
   }
 
-  function handleLogin() {
-    setLoggedIn(true);
-    closeAllPopups();
-  }
-
   function signOut() {
     setLoggedIn(false);
+    // setUserName('');
+    setCurrentUser({});
+    localStorage.removeItem('token');
+    history.push('/');
   }
+
+  function handleRegister(email, password, name) {
+    register(email, password, name)
+      .then((data) => {
+        // history.push('/sign-in');
+        // console.log(data);
+        setDataInfoTool({
+          title: 'Пользователь успешно зарегистрирован!',
+        });
+        openPopupInfo();
+      })
+      .catch((err) => {
+        console.error(err);
+        setDataInfoTool({
+          title: 'Что-то пошло не так! Попробуйте ещё раз.',
+        });
+        openPopupInfo();
+      });
+  }
+
+  function handleLogin(email, password) {
+    // console.log(email, password);
+    authorize(email, password)
+      .then((data) => {
+        // console.log(data);
+        localStorage.setItem('token', data.token);
+        // setUserName(email);
+        getUserMe(data.token).then((res) => {
+          //   setUserName(res.name);
+          setCurrentUser(res);
+        });
+        setLoggedIn(true);
+        closeAllPopups();
+        // history.push('/');
+      })
+      .catch((err) => {
+        setDataInfoTool({
+          title: 'Что-то пошло не так! Попробуйте ещё раз.',
+        });
+        console.error(err);
+        openPopupInfo();
+      });
+  }
+
+  function tokenCheck() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      getUserMe(token)
+        .then((res) => {
+          if (res) {
+            setLoggedIn(true);
+            // console.log(res);
+            // setUserName(res.name);
+            setCurrentUser(res);
+            location.pathname === '/saved-news' ? history.push('/saved-news') : history.push('/');
+            // console.log(userName);
+            // history.push("/");
+          } else {
+            setDataInfoTool({
+              title: 'Что-то пошло не так! Попробуйте ещё раз.',
+            });
+            openPopupInfo();
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+
+  React.useEffect(() => {
+    tokenCheck();
+  }, []);
 
   //   React.useEffect(() => {
   //     getNews('президент')
   //       .then((results) => {
-  //         setCards(results.articles);
+  //         setArticles(results.articles);
   //       })
   //       .catch((err) => console.log(`Error ${err}`));
   //   }, []);
+
+  // показ последних найденных новостей
+  React.useEffect(() => {
+    // localStorage.getItem('news');
+    // localStorage.setItem('news', JSON.stringify(articles));
+    if (JSON.parse(localStorage.getItem('news'))) {
+      setArticles(JSON.parse(localStorage.getItem('news')));
+    } else {
+      localStorage.removeItem('news');
+    }
+    // console.log(articles);
+  }, []);
 
   React.useEffect(() => {
     function handleEscClose(evt) {
@@ -129,6 +226,7 @@ function App() {
   }, []);
 
   return (
+    // <CurrentUserContext.Provider value={currentUser}>
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
         <div className={`${isBurgerOpen && 'page__shadow'} `}></div>
@@ -150,7 +248,7 @@ function App() {
               isPrelodaerOpen={isPrelodaerOpen}
               loggedIn={loggedIn}
               screenWidth={screenWidth}
-              cards={cards}
+              articles={articles}
               firstOpen={firstOpen}
               handleShowMore={handleShowMore}
               newsRow={newsRow}
@@ -166,7 +264,7 @@ function App() {
             openBurger={openBurger}
             screenWidth={screenWidth}
             // временно
-            cards={cards}
+            articles={articles}
           />
         </Switch>
         <Footer screenWidth={screenWidth} />
@@ -185,6 +283,7 @@ function App() {
           onOverlay={handleOnOverlayClick}
           changePopup={changePopup}
           showInfoPopup={openPopupInfo}
+          handleRegister={handleRegister}
         />
 
         <PopupInfo
@@ -192,6 +291,7 @@ function App() {
           onClose={closeAllPopups}
           onOverlay={handleOnOverlayClick}
           changePopup={changePopup}
+          title={dataInfoTool.title}
         />
       </div>
     </CurrentUserContext.Provider>

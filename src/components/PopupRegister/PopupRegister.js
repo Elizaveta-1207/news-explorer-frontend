@@ -1,7 +1,7 @@
 import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
-function PopupRegister({ isOpen, onClose, onOverlay, changePopup, showInfoPopup }) {
+function PopupRegister({ isOpen, onClose, onOverlay, changePopup, showInfoPopup, handleRegister }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [name, setName] = React.useState('');
@@ -16,8 +16,28 @@ function PopupRegister({ isOpen, onClose, onOverlay, changePopup, showInfoPopup 
     }
   }
 
+  function resetForm() {
+    setEmail('');
+    setPassword('');
+    setName('');
+  }
+
   function handleSubmit(evt) {
     evt.preventDefault();
+    if (!email) {
+      console.log('Не введен email');
+      return;
+    }
+    if (!password) {
+      console.log('Не введен пароль');
+      return;
+    }
+    if (!name) {
+      console.log('Не введено имя');
+      return;
+    }
+    handleRegister(email, password, name);
+    resetForm();
   }
 
   return (
@@ -65,7 +85,8 @@ function PopupRegister({ isOpen, onClose, onOverlay, changePopup, showInfoPopup 
         <span id='password-error' className='popup__error_visible popup__error_exist'>
           Такой пользователь уже есть
         </span>
-        <button type='submit' className='popup__button' onClick={showInfoPopup}>
+        {/* <button type='submit' className='popup__button' onClick={showInfoPopup}> */}
+        <button type='submit' className='popup__button'>
           Зарегистрироваться
         </button>
         <p className='popup__text'>

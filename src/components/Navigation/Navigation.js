@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function Navigation({ location, loggedIn, onAuth, signOut, isBurgerOpen, openBurger }) {
+  const currentUser = React.useContext(CurrentUserContext);
   return (
     <>
       <button
@@ -41,7 +43,8 @@ function Navigation({ location, loggedIn, onAuth, signOut, isBurgerOpen, openBur
               : ''
           }`}
         >
-          <p className='header__item'>{loggedIn ? 'Елизавета' : 'Авторизоваться'}</p>
+          <p className='header__item'>{loggedIn ? currentUser.name : 'Авторизоваться'}</p>
+          {/* <p className='header__item'>{loggedIn ? 'userName' : 'Авторизоваться'}</p> */}
           {loggedIn && (
             <svg
               className='header__logout'

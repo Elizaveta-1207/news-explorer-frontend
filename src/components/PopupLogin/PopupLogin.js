@@ -21,8 +21,23 @@ function PopupLogin({ isOpen, onClose, onOverlay, changePopup, handleLogin }) {
     }
   }
 
+  function resetForm() {
+    setEmail('');
+    setPassword('');
+  }
+
   function handleSubmit(evt) {
     evt.preventDefault();
+    if (!email) {
+      console.log('Не введен email');
+      return;
+    }
+    if (!password) {
+      console.log('Не введен пароль');
+      return;
+    }
+    handleLogin(email, password);
+    resetForm();
   }
 
   return (
@@ -60,7 +75,7 @@ function PopupLogin({ isOpen, onClose, onOverlay, changePopup, handleLogin }) {
         />
         <span id='password-error'></span>
         {/* поставить disabled для деактивации кнопки */}
-        <button type='submit' className='popup__button' onClick={handleLogin}>
+        <button type='submit' className='popup__button'>
           Войти
         </button>
         <p className='popup__text'>

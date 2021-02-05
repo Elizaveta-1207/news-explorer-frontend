@@ -1,11 +1,11 @@
 import React from 'react';
 import NotFoundIcon from '../../images/not-found-icon.png';
 
-function Preloader({ isPrelodaerOpen, cards }) {
+function Preloader({ isPrelodaerOpen, articles }) {
   return (
     //для проверки в следующей строке добавить класс preloader__visible
     <section
-      className={`preloader ${(isPrelodaerOpen || cards.length === 0) && 'preloader__visible'}`}
+      className={`preloader ${(isPrelodaerOpen || articles.length === 0) && 'preloader__visible'}`}
     >
       {/* одновременно с первым комментарием для проверки в следующей строке добавить класс circle-preloader__container_visible */}
       <div
@@ -19,7 +19,7 @@ function Preloader({ isPrelodaerOpen, cards }) {
       {/* одновременно с первым комментарием для проверки в следующей строке добавить класс preloader__container_visible */}
       <div
         className={`preloader__container ${
-          cards.length === 0 && !isPrelodaerOpen && 'preloader__container_visible'
+          articles.length === 0 && !isPrelodaerOpen && 'preloader__container_visible'
         }`}
       >
         <img src={NotFoundIcon} alt='Not found icon' className='preloader__not-found-icon' />

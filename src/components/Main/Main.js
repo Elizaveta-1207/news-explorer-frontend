@@ -8,21 +8,21 @@ function Main({
   isPrelodaerOpen,
   loggedIn,
   screenWidth,
-  cards,
+  articles,
   firstOpen,
   handleShowMore,
   newsRow,
 }) {
   return (
     <>
-      {!firstOpen && <Preloader isPrelodaerOpen={isPrelodaerOpen} cards={cards} />}
-      {cards.length !== 0 && (
+      {!firstOpen && <Preloader isPrelodaerOpen={isPrelodaerOpen} articles={articles} />}
+      {articles.length !== 0 && (
         <NewsCardList
           location={location}
           isPrelodaerOpen={isPrelodaerOpen}
           loggedIn={loggedIn}
           screenWidth={screenWidth}
-          cards={cards}
+          articles={articles}
           handleShowMore={handleShowMore}
           newsRow={newsRow}
         />
