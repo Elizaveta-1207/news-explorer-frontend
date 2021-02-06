@@ -12,10 +12,13 @@ function Main({
   firstOpen,
   handleShowMore,
   newsRow,
+  saveArticle,
+  savedArticles,
+  handleOnAuthClick,
 }) {
   return (
     <>
-      {!firstOpen && <Preloader isPrelodaerOpen={isPrelodaerOpen} articles={articles} />}
+      <Preloader isPrelodaerOpen={isPrelodaerOpen} articles={articles} firstOpen={firstOpen} />
       {articles.length !== 0 && (
         <NewsCardList
           location={location}
@@ -25,6 +28,9 @@ function Main({
           articles={articles}
           handleShowMore={handleShowMore}
           newsRow={newsRow}
+          saveArticle={saveArticle}
+          savedArticles={savedArticles}
+          handleOnAuthClick={handleOnAuthClick}
         />
       )}
       <About />

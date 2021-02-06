@@ -27,7 +27,7 @@ function SearchForm({ handleSearch }) {
           className='after-header__input'
           onChange={handleChange}
         />
-        <button type='submit' className='after-header__btn' onClick={handleSubmit}>
+        <button type='submit' className='after-header__btn'>
           Искать
         </button>
       </form>

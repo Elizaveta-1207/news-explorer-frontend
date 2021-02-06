@@ -50,6 +50,7 @@ function App() {
   const [articles, setArticles] = React.useState([]);
   const [firstOpen, setFirstOpen] = React.useState(true);
   const [newsRow, setNewsRow] = React.useState(0);
+  const [savedArticles, setSavedArticles] = React.useState([]);
 
   const history = useHistory();
   // временная функция для прелоадера
@@ -131,6 +132,7 @@ function App() {
         setDataInfoTool({
           title: 'Что-то пошло не так! Попробуйте ещё раз.',
         });
+
         openPopupInfo();
       });
   }
@@ -151,38 +153,74 @@ function App() {
         // history.push('/');
       })
       .catch((err) => {
-        setDataInfoTool({
-          title: 'Что-то пошло не так! Попробуйте ещё раз.',
-        });
         console.error(err);
-        openPopupInfo();
+        // setDataInfoTool({
+        //   title: 'Что-то пошло не так! Попробуйте ещё раз.',
+        // });
+
+        // openPopupInfo();
       });
   }
 
   function tokenCheck() {
     const token = localStorage.getItem('token');
-    if (token) {
-      getUserMe(token)
-        .then((res) => {
-          if (res) {
-            setLoggedIn(true);
-            // console.log(res);
-            // setUserName(res.name);
-            setCurrentUser(res);
-            location.pathname === '/saved-news' ? history.push('/saved-news') : history.push('/');
-            // console.log(userName);
-            // history.push("/");
-          } else {
-            setDataInfoTool({
-              title: 'Что-то пошло не так! Попробуйте ещё раз.',
-            });
-            openPopupInfo();
-          }
+    // console.log(token);
+    // if (token) {
+    getUserMe(token)
+      .then((res) => {
+        if (res) {
+          setLoggedIn(true);
+          // console.log(res);
+          // setUserName(res.name);
+          setCurrentUser(res);
+          location.pathname === '/saved-news' ? history.push('/saved-news') : history.push('/');
+          // console.log(userName);
+          // history.push("/");
+        } else {
+          setDataInfoTool({
+            title: 'Что-то пошло не так! Попробуйте ещё раз.',
+          });
+          openPopupInfo();
+        }
+      })
+      .catch((err) => {
+        location.pathname === '/saved-news' && handleOnAuthClick() && history.push('/');
+        console.log(err);
+      });
+    // }
+  }
+
+  function saveArticle(article) {
+    const token = localStorage.getItem('token');
+    // const articleReq = {
+    //   // keyword: article.keyword,
+    //   name: article.name,
+    //   title: article.title,
+    //   description: article.description,
+    //   url: article.url,
+    //   urlToImage: article.urlToImage,
+    //   publishedAt: article.publishedAt,
+    // };
+    const saved = savedArticles.find(
+      (item) => item.title === article.title && item.link === article.link,
+    );
+
+    if (!saved) {
+      createArticle(article, token)
+        .then((savedArticle) => {
+          setSavedArticles([...savedArticles, savedArticle]);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      deleteArticle(saved._id, token)
+        .then(() => {
+          setSavedArticles(savedArticles.filter((articles) => articles._id !== saved._id));
         })
         .catch((err) => console.log(err));
     }
   }
 
+  // проверка токена при загрузке страницы
   React.useEffect(() => {
     tokenCheck();
   }, []);
@@ -194,6 +232,14 @@ function App() {
   //       })
   //       .catch((err) => console.log(`Error ${err}`));
   //   }, []);
+
+  // запись сохраненных новостей
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    loggedIn && getArticles(token).then((res) => res && setSavedArticles(res));
+  }, [loggedIn]);
+
+  //   console.log(savedArticles);
 
   // показ последних найденных новостей
   React.useEffect(() => {
@@ -252,6 +298,9 @@ function App() {
               firstOpen={firstOpen}
               handleShowMore={handleShowMore}
               newsRow={newsRow}
+              saveArticle={saveArticle}
+              savedArticles={savedArticles}
+              handleOnAuthClick={handleOnAuthClick}
             />
           </Route>
           <ProtectedRoute
@@ -264,7 +313,9 @@ function App() {
             openBurger={openBurger}
             screenWidth={screenWidth}
             // временно
-            articles={articles}
+            // articles={articles}
+            savedArticles={savedArticles}
+            saveArticle={saveArticle}
           />
         </Switch>
         <Footer screenWidth={screenWidth} />

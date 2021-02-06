@@ -60,11 +60,11 @@ const createArticle = ({ keyword, title, text, date, source, link, image }, toke
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ keyword, title, text, date, source: source.name, link, image }),
+    body: JSON.stringify({ keyword, title, text, date, source, link, image }),
   }).then(checkResponse);
 
-const deleteArticle = (id, token) =>
-  fetch(`${BASE_URL}/articles/${id}`, {
+const deleteArticle = (_id, token) =>
+  fetch(`${BASE_URL}/articles/${_id}`, {
     method: 'DELETE',
     headers: {
       Accept: 'application/json',

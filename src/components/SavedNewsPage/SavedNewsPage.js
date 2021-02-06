@@ -10,6 +10,8 @@ function SavedNewsPage({
   openBurger,
   screenWidth,
   cards,
+  savedArticles,
+  saveArticle,
 }) {
   return (
     <>
@@ -21,7 +23,14 @@ function SavedNewsPage({
         openBurger={openBurger}
         screenWidth={screenWidth}
       />
-      <SavedNews location={location} screenWidth={screenWidth} cards={cards} />
+      <SavedNews
+        location={location}
+        screenWidth={screenWidth}
+        cards={cards}
+        savedArticles={savedArticles}
+        loggedIn={loggedIn}
+        saveArticle={saveArticle}
+      />
     </>
   );
 }

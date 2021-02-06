@@ -10,13 +10,34 @@ function NewsCard({
   location,
   loggedIn,
   screenWidth,
+  saveArticle,
+  savedArticles,
+  handleOnAuthClick,
 }) {
-  const [isSaved, setIsSaved] = React.useState(false);
+  //   const [isSaved, setIsSaved] = React.useState(false);
+  const isSaved =
+    loggedIn && savedArticles.some((item) => item.title === title && item.link === url);
+  //   console.log(isSaved);
   //   const [isAuth, setIsAuth] = React.useState(true);
+  const article = {
+    keyword: 'new news',
+    title: title,
+    text: description,
+    date: publishedAt,
+    source: name,
+    link: url,
+    image: urlToImage,
+  };
+  //   console.log(article);
 
   function handleSaved() {
+    // console.log(loggedIn);
     if (loggedIn) {
-      isSaved ? setIsSaved(false) : setIsSaved(true);
+      //   isSaved ? setIsSaved(false) : setIsSaved(true);
+
+      saveArticle(article);
+    } else {
+      handleOnAuthClick();
     }
   }
 
