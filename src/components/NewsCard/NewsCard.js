@@ -15,11 +15,8 @@ function NewsCard({
   handleOnAuthClick,
   keyword,
 }) {
-  //   const [isSaved, setIsSaved] = React.useState(false);
   const isSaved =
     loggedIn && savedArticles.some((item) => item.title === title && item.link === url);
-  //   console.log(isSaved);
-  //   const [isAuth, setIsAuth] = React.useState(true);
   const article = {
     keyword: keyword,
     title: title,
@@ -29,13 +26,9 @@ function NewsCard({
     link: url,
     image: urlToImage,
   };
-  //   console.log(article);
 
   function handleSaved() {
-    // console.log(loggedIn);
     if (loggedIn) {
-      //   isSaved ? setIsSaved(false) : setIsSaved(true);
-
       saveArticle(article);
     } else {
       handleOnAuthClick();
@@ -88,8 +81,6 @@ function NewsCard({
         )}
       </button>
 
-      {/*если авторизирован и путь / => добавить класс невидимости */}
-      {/* <div className={`news-card__tooltip ${isAuth && location.pathname === '/' && 'test'}`}> */}
       <div
         className={`news-card__tooltip ${
           loggedIn && location.pathname === '/' && 'news-card__tooltip_hidden'

@@ -105,13 +105,6 @@
   transition: all 0.3s ease-in-out;
 }
 
-/* .news-card__marker_unlogged {
-  cursor: auto;
-}
-.news-card__marker_unsaved:hover .news-card__path_unlogged {
-  stroke: #b6bcbf;
-} */
-
 .news-card__marker_saved .news-card__path_save {
   fill: #2f71e5;
   stroke: #2f71e5;

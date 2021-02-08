@@ -2,15 +2,7 @@ import React from 'react';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 
-function SavedNews({
-  location,
-  screenWidth,
-  cards,
-  savedArticles,
-  loggedIn,
-  saveArticle,
-  //   keyword,
-}) {
+function SavedNews({ location, screenWidth, cards, savedArticles, loggedIn, saveArticle }) {
   return (
     <>
       <SavedNewsHeader savedArticles={savedArticles} />
@@ -22,7 +14,6 @@ function SavedNews({
           savedArticles={savedArticles}
           loggedIn={loggedIn}
           saveArticle={saveArticle}
-          //   keyword={keyword}
         />
       )}
     </>

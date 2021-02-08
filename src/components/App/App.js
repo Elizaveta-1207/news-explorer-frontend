@@ -28,7 +28,8 @@ import {
 
 function App() {
   const location = useLocation();
-  // загатовка для авторизации пользователя
+
+  const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   const [isPopupLoginOpen, setIsPopupLoginOpen] = React.useState(false);
@@ -39,29 +40,20 @@ function App() {
   });
   const [registerError, setRegisterError] = React.useState(false);
 
-  //   const [userName, setUserName] = React.useState('');
-
-  const [isPrelodaerOpen, setIsPrelodaerOpen] = React.useState(false);
-
   const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
   const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
 
-  const [currentUser, setCurrentUser] = React.useState({});
-
+  const [isPrelodaerOpen, setIsPrelodaerOpen] = React.useState(false);
   const [articles, setArticles] = React.useState([]);
   const [firstOpen, setFirstOpen] = React.useState(true);
   const [newsRow, setNewsRow] = React.useState(0);
+
   const [savedArticles, setSavedArticles] = React.useState([]);
-  //   const [keywords, setKeywords] = React.useState([]);
   const [keyword, setKeyword] = React.useState('');
 
   const history = useHistory();
-  // временная функция для прелоадера
-  //   function handleSearch() {
-  //     setIsPrelodaerOpen(true);
-  //     setTimeout(() => setIsPrelodaerOpen(false), 1000);
-  //   }
 
+  // поиск статей
   function handleSearch(keyword) {
     setIsPrelodaerOpen(true);
     getNews(keyword)
@@ -73,36 +65,39 @@ function App() {
 
         localStorage.setItem('keyword', JSON.stringify(keyword));
         setKeyword(keyword);
-
-        // !keywords.some((i) => i === keyword) && setKeywords([...keywords, keyword]);
         setNewsRow(0);
       })
       .catch((err) => console.log(`Error ${err}`));
   }
 
-  //   console.log(keyword);
-
+  // сброс ошибки при регистрации о том, что пользователь существует
   function resetRegisterError() {
     setRegisterError(false);
   }
 
+  // показать следующую строку со статьями
   function handleShowMore() {
     setNewsRow(newsRow + 1);
   }
 
+  // открытие попапа авторизации
   function handleOnAuthClick() {
     setIsPopupLoginOpen(true);
   }
 
+  // открытие бургер-меню
   function openBurger() {
     setIsBurgerOpen(!isBurgerOpen);
   }
 
+  // при открытии попапа с инфо закрывать попап с регистрацией и авторизацией
   function openPopupInfo() {
     setIsPopupInfoOpen(true);
     setIsPopupRegisterOpen(false);
+    setIsPopupLoginOpen(false);
   }
 
+  // закрытие всех попапов
   function closeAllPopups() {
     setIsPopupLoginOpen(false);
     setIsPopupRegisterOpen(false);
@@ -110,12 +105,14 @@ function App() {
     setRegisterError(false);
   }
 
+  // закрытие попапов по оверлею
   function handleOnOverlayClick(evt) {
     if (evt.target === evt.currentTarget) {
       closeAllPopups();
     }
   }
 
+  // переключение между попапами
   function changePopup(evt) {
     closeAllPopups();
     evt.target.textContent === 'Зарегистрироваться'
@@ -123,19 +120,18 @@ function App() {
       : setIsPopupLoginOpen(true);
   }
 
+  // выход из своей учетной записи
   function signOut() {
     setLoggedIn(false);
-    // setUserName('');
     setCurrentUser({});
     localStorage.removeItem('token');
     history.push('/');
   }
 
+  // регистрация
   function handleRegister(email, password, name) {
     register(email, password, name)
       .then((data) => {
-        // history.push('/sign-in');
-        // console.log(data);
         setDataInfoTool({
           title: 'Пользователь успешно зарегистрирован!',
         });
@@ -143,53 +139,39 @@ function App() {
       })
       .catch((err) => {
         console.error(err);
-        // setDataInfoTool({
-        //   title: 'Что-то пошло не так! Попробуйте ещё раз.',
-        // });
         setRegisterError(true);
-        // openPopupInfo();
       });
   }
 
+  // авторизация
   function handleLogin(email, password) {
-    // console.log(email, password);
     authorize(email, password)
       .then((data) => {
-        // console.log(data);
         localStorage.setItem('token', data.token);
-        // setUserName(email);
         getUserMe(data.token).then((res) => {
-          //   setUserName(res.name);
           setCurrentUser(res);
         });
         setLoggedIn(true);
         closeAllPopups();
-        // history.push('/');
       })
       .catch((err) => {
         console.error(err);
         setDataInfoTool({
           title: 'Неверный логин или пароль',
         });
-        setIsPopupLoginOpen(false);
         openPopupInfo();
       });
   }
 
+  // проверка токена
   function tokenCheck() {
     const token = localStorage.getItem('token');
-    // console.log(token);
-    // if (token) {
     getUserMe(token)
       .then((res) => {
         if (res) {
           setLoggedIn(true);
-          // console.log(res);
-          // setUserName(res.name);
           setCurrentUser(res);
           location.pathname === '/saved-news' ? history.push('/saved-news') : history.push('/');
-          // console.log(userName);
-          // history.push("/");
         } else {
           setDataInfoTool({
             title: 'Что-то пошло не так! Попробуйте ещё раз.',
@@ -201,20 +183,11 @@ function App() {
         location.pathname === '/saved-news' && handleOnAuthClick() && history.push('/');
         console.log(err);
       });
-    // }
   }
 
+  // сохранение статьи
   function saveArticle(article) {
     const token = localStorage.getItem('token');
-    // const articleReq = {
-    //   // keyword: article.keyword,
-    //   name: article.name,
-    //   title: article.title,
-    //   description: article.description,
-    //   url: article.url,
-    //   urlToImage: article.urlToImage,
-    //   publishedAt: article.publishedAt,
-    // };
     const saved = savedArticles.find(
       (item) => item.title === article.title && item.link === article.link,
     );
@@ -223,11 +196,6 @@ function App() {
       createArticle(article, token)
         .then((savedArticle) => {
           setSavedArticles([savedArticle, ...savedArticles]);
-
-          //   !keywords.some((i) => i === article.keyword) &&
-          //     setKeywords([article.keyword, ...keywords]);
-          //   console.log(tempKey);
-          //   localStorage.setItem('keywords', JSON.stringify(tempKey));
         })
         .catch((err) => console.log(err));
     } else {
@@ -235,39 +203,15 @@ function App() {
         .then(() => {
           let savedArr = savedArticles.filter((articles) => articles._id !== saved._id);
           setSavedArticles(savedArr);
-
-          //   console.log(savedArr);
-          //   console.log(saved);
-          //   console.log(keywords);
-          //   console.log(!savedArr.some((i) => i.keyword === saved.keyword));
-
-          //   let tempKey = keywords;
-          //   if (!savedArr.some((i) => i.keyword === saved.keyword)) {
-          //     tempKey = keywords.filter((i) => i !== saved.keyword);
-          //     setKeywords(tempKey);
-          //   }
-          //   localStorage.setItem('keywords', JSON.stringify(tempKey));
-          //   console.log(tempKey);
         })
         .catch((err) => console.log(err));
     }
-    // console.log(keywords);
   }
-  //   console.log(keywords);
-  //   console.log(savedArticles);
 
   // проверка токена при загрузке страницы
   React.useEffect(() => {
     tokenCheck();
   }, []);
-
-  //   React.useEffect(() => {
-  //     getNews('президент')
-  //       .then((results) => {
-  //         setArticles(results.articles);
-  //       })
-  //       .catch((err) => console.log(`Error ${err}`));
-  //   }, []);
 
   // запись сохраненных новостей
   React.useEffect(() => {
@@ -275,26 +219,18 @@ function App() {
     loggedIn && getArticles(token).then((res) => res && setSavedArticles(res));
   }, [loggedIn]);
 
-  //   console.log(savedArticles);
-
   // показ последних найденных новостей
   React.useEffect(() => {
-    // localStorage.getItem('news');
-    // localStorage.setItem('news', JSON.stringify(articles));
     if (JSON.parse(localStorage.getItem('news'))) {
       setArticles(JSON.parse(localStorage.getItem('news')));
       setKeyword(JSON.parse(localStorage.getItem('keyword')));
-
-      // localStorage.setItem('keywords', JSON.stringify(keywords));
-
-      //   setKeywords(JSON.parse(localStorage.getItem('keywords')));
     } else {
       localStorage.removeItem('news');
       localStorage.removeItem('keyword');
     }
-    // console.log(articles);
   }, []);
 
+  // закрытие попапов с помощью Esc
   React.useEffect(() => {
     function handleEscClose(evt) {
       if (evt.key === 'Escape') {
@@ -307,6 +243,7 @@ function App() {
     };
   });
 
+  // отслеживание изменения ширины экрана
   React.useEffect(() => {
     window.addEventListener('resize', (evt) => {
       setScreenWidth(evt.target.innerWidth);
@@ -318,7 +255,6 @@ function App() {
   }
 
   return (
-    // <CurrentUserContext.Provider value={currentUser}>
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
         <div className={`${isBurgerOpen && 'page__shadow'} `} onClick={onOverlayBurger}></div>
@@ -359,11 +295,8 @@ function App() {
             isBurgerOpen={isBurgerOpen}
             openBurger={openBurger}
             screenWidth={screenWidth}
-            // временно
-            // articles={articles}
             savedArticles={savedArticles}
             saveArticle={saveArticle}
-            // keyword={keyword}
           />
         </Switch>
         <Footer screenWidth={screenWidth} />
@@ -381,7 +314,6 @@ function App() {
           onClose={closeAllPopups}
           onOverlay={handleOnOverlayClick}
           changePopup={changePopup}
-          showInfoPopup={openPopupInfo}
           handleRegister={handleRegister}
           registerError={registerError}
           resetRegisterError={resetRegisterError}

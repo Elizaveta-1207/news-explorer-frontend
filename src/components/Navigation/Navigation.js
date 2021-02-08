@@ -13,7 +13,6 @@ function Navigation({ location, loggedIn, onAuth, signOut, isBurgerOpen, openBur
         onClick={openBurger}
       ></button>
       <nav className={`header__nav ${isBurgerOpen && 'header__nav_opened'}`}>
-        {/* <nav className={`header__nav `}> */}
         <Link
           to='/'
           className={`header__link ${
@@ -44,7 +43,6 @@ function Navigation({ location, loggedIn, onAuth, signOut, isBurgerOpen, openBur
           }`}
         >
           <p className='header__item'>{loggedIn ? currentUser.name : 'Авторизоваться'}</p>
-          {/* <p className='header__item'>{loggedIn ? 'userName' : 'Авторизоваться'}</p> */}
           {loggedIn && (
             <svg
               className='header__logout'

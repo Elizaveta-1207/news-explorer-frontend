@@ -3,14 +3,8 @@ import NotFoundIcon from '../../images/not-found-icon.png';
 
 function Preloader({ isPrelodaerOpen, articles, firstOpen }) {
   return (
-    //для проверки в следующей строке добавить класс preloader__visible
     <>
-      {/* <section
-        className={`preloader ${
-          (isPrelodaerOpen || articles.length === 0) && 'preloader__visible'
-		}`} */}
       <section className={`preloader ${isPrelodaerOpen && 'preloader__visible'}`}>
-        {/* одновременно с первым комментарием для проверки в следующей строке добавить класс circle-preloader__container_visible */}
         <div
           className={`circle-preloader__container ${
             isPrelodaerOpen && 'circle-preloader__container_visible'
@@ -20,7 +14,7 @@ function Preloader({ isPrelodaerOpen, articles, firstOpen }) {
           <p className='preloader__text'>Идет поиск новостей...</p>
         </div>
       </section>
-      {/* одновременно с первым комментарием для проверки в следующей строке добавить класс preloader__container_visible */}
+
       {!firstOpen && (
         <section className={`preloader ${articles.length === 0 && 'preloader__visible'}`}>
           <div

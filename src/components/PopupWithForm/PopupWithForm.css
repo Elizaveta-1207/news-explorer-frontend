@@ -10,7 +10,6 @@
   box-sizing: border-box;
   padding: 0 50px;
   display: flex;
-  /* display: none; */
   z-index: 2;
   visibility: hidden;
   opacity: 0;
@@ -18,11 +17,8 @@
 }
 
 .popup_opened {
-  /* display: flex; */
   visibility: visible;
   opacity: 1;
-  /* visibility: hidden;
-	opacity: 0; */
   transition: visibility 0.3s ease, opacity 0.3s linear;
 }
 
@@ -45,7 +41,6 @@
   background-position: center;
   background-size: contain;
   padding: 0;
-  /* transform: rotate(45deg); */
 
   position: absolute;
   top: -40px;

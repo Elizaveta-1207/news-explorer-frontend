@@ -11,7 +11,6 @@
 
 .preloader__visible {
   display: flex;
-  /* padding: 80px 0; */
 }
 
 .preloader__container {

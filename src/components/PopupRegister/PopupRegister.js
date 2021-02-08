@@ -7,35 +7,11 @@ function PopupRegister({
   onClose,
   onOverlay,
   changePopup,
-  showInfoPopup,
   handleRegister,
   registerError,
   resetRegisterError,
 }) {
-  //   const [email, setEmail] = React.useState('');
-  //   const [password, setPassword] = React.useState('');
-  //   const [name, setName] = React.useState('');
-
-  //   console.log(registerError);
-
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
-  //   console.log(values);
-
-  //   function handleChange(evt) {
-  //     if (evt.target.name === 'Email') {
-  //       setEmail(evt.target.value);
-  //     } else if (evt.target.name === 'Password') {
-  //       setPassword(evt.target.value);
-  //     } else if (evt.target.name === 'Name') {
-  //       setName(evt.target.value);
-  //     }
-  //   }
-
-  //   function resetForm() {
-  //     setEmail('');
-  //     setPassword('');
-  //     setName('');
-  //   }
 
   function changeInput(evt) {
     handleChange(evt);
@@ -44,20 +20,7 @@ function PopupRegister({
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    // if (!email) {
-    //   console.log('Не введен email');
-    //   return;
-    // }
-    // if (!password) {
-    //   console.log('Не введен пароль');
-    //   return;
-    // }
-    // if (!name) {
-    //   console.log('Не введено имя');
-    //   return;
-    // }
     handleRegister(values.Email, values.Password, values.Name);
-    // resetForm();
   }
 
   React.useEffect(() => {
@@ -80,7 +43,6 @@ function PopupRegister({
           type='email'
           placeholder='Введите почту'
           name='Email'
-          //   onChange={handleChange}
           onChange={changeInput}
           value={values.Email || ''}
           className='popup__input'
@@ -123,7 +85,6 @@ function PopupRegister({
             Такой пользователь уже есть
           </div>
         )}
-        {/* <button type='submit' className='popup__button' onClick={showInfoPopup}> */}
         <button type='submit' className='popup__button' disabled={!isValid}>
           Зарегистрироваться
         </button>

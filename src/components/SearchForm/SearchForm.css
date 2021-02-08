@@ -7,7 +7,6 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  /* height: 64px; */
 }
 
 .after-header__input {
@@ -29,7 +28,6 @@
 
 .after-header__input:focus {
   outline: none;
-  /* box-shadow: 0 -5px 10px 0 #fff; */
 }
 
 .after-header__input:autofill {
@@ -39,7 +37,7 @@
 .after-header__btn {
   border: none;
   width: calc(168 * 100% / 608);
-  /* height: 66px; */
+
   border-radius: 100px;
   background-color: #2f71e5;
   color: #fff;

@@ -1,6 +1,5 @@
 import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
-// import News from '../../utils/News.json';
 
 function NewsCardList({
   location,
@@ -29,13 +28,10 @@ function NewsCardList({
             <ul
               className={`news__list ${location.pathname === '/saved-news' && 'news__list_saved'}`}
             >
-              {/* {News.articles.map((props, index) => ( */}
               {location.pathname === '/' &&
                 showNewsRows.map((props, index) => (
                   <NewsCard
                     key={index}
-                    //   key={props.id}
-                    //   id={props.source.id}
                     name={props.source.name}
                     {...props}
                     location={location}
@@ -51,8 +47,6 @@ function NewsCardList({
                 savedArticles.map((props, index) => (
                   <NewsCard
                     key={index}
-                    //   key={props.id}
-                    //   id={props.source.id}
                     name={props.source}
                     title={props.title}
                     description={props.text}
@@ -60,14 +54,12 @@ function NewsCardList({
                     urlToImage={props.image}
                     publishedAt={props.date}
                     keyword={props.keyword}
-                    // {...props}
                     location={location}
                     loggedIn={loggedIn}
                     screenWidth={screenWidth}
                     saveArticle={saveArticle}
                     savedArticles={savedArticles}
                     handleOnAuthClick={handleOnAuthClick}
-                    // keyword={keyword}
                   />
                 ))}
             </ul>
