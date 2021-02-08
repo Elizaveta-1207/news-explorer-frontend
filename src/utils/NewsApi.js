@@ -8,7 +8,8 @@ inWeek.setDate(inWeek.getDate() - 7);
 const fromDate = inWeek.toISOString();
 
 const NEWS_OPTIONS = {
-  newsApi: 'https://newsapi.org/v2/everything',
+  //   newsApi: 'https://newsapi.org/v2/everything',
+  newsApi: 'https://nomoreparties.co/v2/everything',
   apiKey: '5274598129cb4726b1e7d60d36a7e7a6',
   to: toDate.slice(0, 10),
   from: fromDate.slice(0, 10),
