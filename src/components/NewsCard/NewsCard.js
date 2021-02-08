@@ -13,6 +13,7 @@ function NewsCard({
   saveArticle,
   savedArticles,
   handleOnAuthClick,
+  keyword,
 }) {
   //   const [isSaved, setIsSaved] = React.useState(false);
   const isSaved =
@@ -20,7 +21,7 @@ function NewsCard({
   //   console.log(isSaved);
   //   const [isAuth, setIsAuth] = React.useState(true);
   const article = {
-    keyword: 'new news',
+    keyword: keyword,
     title: title,
     text: description,
     date: publishedAt,
@@ -97,7 +98,7 @@ function NewsCard({
         {location.pathname === '/' ? 'Войдите, чтобы сохранять статьи' : 'Убрать из сохранённых'}
       </div>
 
-      {location.pathname === '/saved-news' && <div className={`news-card__tag`}>Новость</div>}
+      {location.pathname === '/saved-news' && <div className={`news-card__tag`}>{keyword}</div>}
 
       <img className='news-card__img' src={urlToImage} alt='News' />
       <div className='news-card__info'>

@@ -12,6 +12,7 @@ function SavedNewsPage({
   cards,
   savedArticles,
   saveArticle,
+  //   keyword,
 }) {
   return (
     <>
@@ -30,6 +31,7 @@ function SavedNewsPage({
         savedArticles={savedArticles}
         loggedIn={loggedIn}
         saveArticle={saveArticle}
+        // keyword={keyword}
       />
     </>
   );

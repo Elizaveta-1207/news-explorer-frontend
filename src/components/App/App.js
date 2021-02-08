@@ -37,6 +37,7 @@ function App() {
   const [dataInfoTool, setDataInfoTool] = React.useState({
     title: '',
   });
+  const [registerError, setRegisterError] = React.useState(false);
 
   //   const [userName, setUserName] = React.useState('');
 
@@ -51,6 +52,8 @@ function App() {
   const [firstOpen, setFirstOpen] = React.useState(true);
   const [newsRow, setNewsRow] = React.useState(0);
   const [savedArticles, setSavedArticles] = React.useState([]);
+  //   const [keywords, setKeywords] = React.useState([]);
+  const [keyword, setKeyword] = React.useState('');
 
   const history = useHistory();
   // временная функция для прелоадера
@@ -68,9 +71,19 @@ function App() {
         setIsPrelodaerOpen(false);
         setArticles(results.articles);
 
+        localStorage.setItem('keyword', JSON.stringify(keyword));
+        setKeyword(keyword);
+
+        // !keywords.some((i) => i === keyword) && setKeywords([...keywords, keyword]);
         setNewsRow(0);
       })
       .catch((err) => console.log(`Error ${err}`));
+  }
+
+  //   console.log(keyword);
+
+  function resetRegisterError() {
+    setRegisterError(false);
   }
 
   function handleShowMore() {
@@ -94,6 +107,7 @@ function App() {
     setIsPopupLoginOpen(false);
     setIsPopupRegisterOpen(false);
     setIsPopupInfoOpen(false);
+    setRegisterError(false);
   }
 
   function handleOnOverlayClick(evt) {
@@ -129,11 +143,11 @@ function App() {
       })
       .catch((err) => {
         console.error(err);
-        setDataInfoTool({
-          title: 'Что-то пошло не так! Попробуйте ещё раз.',
-        });
-
-        openPopupInfo();
+        // setDataInfoTool({
+        //   title: 'Что-то пошло не так! Попробуйте ещё раз.',
+        // });
+        setRegisterError(true);
+        // openPopupInfo();
       });
   }
 
@@ -154,11 +168,11 @@ function App() {
       })
       .catch((err) => {
         console.error(err);
-        // setDataInfoTool({
-        //   title: 'Что-то пошло не так! Попробуйте ещё раз.',
-        // });
-
-        // openPopupInfo();
+        setDataInfoTool({
+          title: 'Неверный логин или пароль',
+        });
+        setIsPopupLoginOpen(false);
+        openPopupInfo();
       });
   }
 
@@ -208,17 +222,39 @@ function App() {
     if (!saved) {
       createArticle(article, token)
         .then((savedArticle) => {
-          setSavedArticles([...savedArticles, savedArticle]);
+          setSavedArticles([savedArticle, ...savedArticles]);
+
+          //   !keywords.some((i) => i === article.keyword) &&
+          //     setKeywords([article.keyword, ...keywords]);
+          //   console.log(tempKey);
+          //   localStorage.setItem('keywords', JSON.stringify(tempKey));
         })
         .catch((err) => console.log(err));
     } else {
       deleteArticle(saved._id, token)
         .then(() => {
-          setSavedArticles(savedArticles.filter((articles) => articles._id !== saved._id));
+          let savedArr = savedArticles.filter((articles) => articles._id !== saved._id);
+          setSavedArticles(savedArr);
+
+          //   console.log(savedArr);
+          //   console.log(saved);
+          //   console.log(keywords);
+          //   console.log(!savedArr.some((i) => i.keyword === saved.keyword));
+
+          //   let tempKey = keywords;
+          //   if (!savedArr.some((i) => i.keyword === saved.keyword)) {
+          //     tempKey = keywords.filter((i) => i !== saved.keyword);
+          //     setKeywords(tempKey);
+          //   }
+          //   localStorage.setItem('keywords', JSON.stringify(tempKey));
+          //   console.log(tempKey);
         })
         .catch((err) => console.log(err));
     }
+    // console.log(keywords);
   }
+  //   console.log(keywords);
+  //   console.log(savedArticles);
 
   // проверка токена при загрузке страницы
   React.useEffect(() => {
@@ -247,8 +283,14 @@ function App() {
     // localStorage.setItem('news', JSON.stringify(articles));
     if (JSON.parse(localStorage.getItem('news'))) {
       setArticles(JSON.parse(localStorage.getItem('news')));
+      setKeyword(JSON.parse(localStorage.getItem('keyword')));
+
+      // localStorage.setItem('keywords', JSON.stringify(keywords));
+
+      //   setKeywords(JSON.parse(localStorage.getItem('keywords')));
     } else {
       localStorage.removeItem('news');
+      localStorage.removeItem('keyword');
     }
     // console.log(articles);
   }, []);
@@ -271,11 +313,15 @@ function App() {
     });
   }, []);
 
+  function onOverlayBurger() {
+    setIsBurgerOpen(false);
+  }
+
   return (
     // <CurrentUserContext.Provider value={currentUser}>
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
-        <div className={`${isBurgerOpen && 'page__shadow'} `}></div>
+        <div className={`${isBurgerOpen && 'page__shadow'} `} onClick={onOverlayBurger}></div>
         <Switch>
           <Route exact path='/'>
             <div className='page__container'>
@@ -301,6 +347,7 @@ function App() {
               saveArticle={saveArticle}
               savedArticles={savedArticles}
               handleOnAuthClick={handleOnAuthClick}
+              keyword={keyword}
             />
           </Route>
           <ProtectedRoute
@@ -316,6 +363,7 @@ function App() {
             // articles={articles}
             savedArticles={savedArticles}
             saveArticle={saveArticle}
+            // keyword={keyword}
           />
         </Switch>
         <Footer screenWidth={screenWidth} />
@@ -335,6 +383,8 @@ function App() {
           changePopup={changePopup}
           showInfoPopup={openPopupInfo}
           handleRegister={handleRegister}
+          registerError={registerError}
+          resetRegisterError={resetRegisterError}
         />
 
         <PopupInfo

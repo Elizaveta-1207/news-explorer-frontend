@@ -122,8 +122,8 @@
   font-size: 12px;
   line-height: 1.25;
   color: #ff0000;
-  position: absolute;
-  padding-left: 1px;
+  /* position: absolute; */
+  /* padding-left: 1px; */
   width: 100%;
 }
 

@@ -13,6 +13,7 @@ function NewsCardList({
   saveArticle,
   savedArticles,
   handleOnAuthClick,
+  keyword,
 }) {
   const showNewsRows = location.pathname === '/' && articles.slice(0, (newsRow + 1) * 3);
   return (
@@ -43,6 +44,7 @@ function NewsCardList({
                     saveArticle={saveArticle}
                     savedArticles={savedArticles}
                     handleOnAuthClick={handleOnAuthClick}
+                    keyword={keyword}
                   />
                 ))}
               {location.pathname === '/saved-news' &&
@@ -57,6 +59,7 @@ function NewsCardList({
                     url={props.link}
                     urlToImage={props.image}
                     publishedAt={props.date}
+                    keyword={props.keyword}
                     // {...props}
                     location={location}
                     loggedIn={loggedIn}
@@ -64,6 +67,7 @@ function NewsCardList({
                     saveArticle={saveArticle}
                     savedArticles={savedArticles}
                     handleOnAuthClick={handleOnAuthClick}
+                    // keyword={keyword}
                   />
                 ))}
             </ul>

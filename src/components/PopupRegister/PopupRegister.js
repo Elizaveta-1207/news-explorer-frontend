@@ -1,44 +1,68 @@
 import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
+import useFormWithValidation from '../ValidateForm/ValidateForm';
 
-function PopupRegister({ isOpen, onClose, onOverlay, changePopup, showInfoPopup, handleRegister }) {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [name, setName] = React.useState('');
+function PopupRegister({
+  isOpen,
+  onClose,
+  onOverlay,
+  changePopup,
+  showInfoPopup,
+  handleRegister,
+  registerError,
+  resetRegisterError,
+}) {
+  //   const [email, setEmail] = React.useState('');
+  //   const [password, setPassword] = React.useState('');
+  //   const [name, setName] = React.useState('');
 
-  function handleChange(evt) {
-    if (evt.target.name === 'Email') {
-      setEmail(evt.target.value);
-    } else if (evt.target.name === 'Password') {
-      setPassword(evt.target.value);
-    } else if (evt.target.name === 'Name') {
-      setName(evt.target.value);
-    }
-  }
+  //   console.log(registerError);
 
-  function resetForm() {
-    setEmail('');
-    setPassword('');
-    setName('');
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+  //   console.log(values);
+
+  //   function handleChange(evt) {
+  //     if (evt.target.name === 'Email') {
+  //       setEmail(evt.target.value);
+  //     } else if (evt.target.name === 'Password') {
+  //       setPassword(evt.target.value);
+  //     } else if (evt.target.name === 'Name') {
+  //       setName(evt.target.value);
+  //     }
+  //   }
+
+  //   function resetForm() {
+  //     setEmail('');
+  //     setPassword('');
+  //     setName('');
+  //   }
+
+  function changeInput(evt) {
+    handleChange(evt);
+    resetRegisterError();
   }
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    if (!email) {
-      console.log('Не введен email');
-      return;
-    }
-    if (!password) {
-      console.log('Не введен пароль');
-      return;
-    }
-    if (!name) {
-      console.log('Не введено имя');
-      return;
-    }
-    handleRegister(email, password, name);
-    resetForm();
+    // if (!email) {
+    //   console.log('Не введен email');
+    //   return;
+    // }
+    // if (!password) {
+    //   console.log('Не введен пароль');
+    //   return;
+    // }
+    // if (!name) {
+    //   console.log('Не введено имя');
+    //   return;
+    // }
+    handleRegister(values.Email, values.Password, values.Name);
+    // resetForm();
   }
+
+  React.useEffect(() => {
+    resetForm();
+  }, [resetForm, isOpen]);
 
   return (
     <PopupWithForm isOpen={isOpen} onClose={onClose} onOverlay={onOverlay}>
@@ -56,11 +80,16 @@ function PopupRegister({ isOpen, onClose, onOverlay, changePopup, showInfoPopup,
           type='email'
           placeholder='Введите почту'
           name='Email'
-          onChange={handleChange}
-          value={email}
+          //   onChange={handleChange}
+          onChange={changeInput}
+          value={values.Email || ''}
           className='popup__input'
         />
-        <span id='email-error'> </span>
+
+        <span id='email-error' className='popup__error_visible'>
+          {errors.Email}
+        </span>
+
         <p className='popup__label'>Пароль</p>
         <input
           required
@@ -68,10 +97,13 @@ function PopupRegister({ isOpen, onClose, onOverlay, changePopup, showInfoPopup,
           placeholder='Введите пароль'
           name='Password'
           onChange={handleChange}
-          value={password}
+          value={values.Password || ''}
           className='popup__input'
+          minLength='8'
         />
-        <span id='password-error'></span>
+        <span id='password-error' className='popup__error_visible'>
+          {errors.Password}
+        </span>
         <p className='popup__label'>Имя</p>
         <input
           required
@@ -79,14 +111,20 @@ function PopupRegister({ isOpen, onClose, onOverlay, changePopup, showInfoPopup,
           placeholder='Введите своё имя'
           name='Name'
           onChange={handleChange}
-          value={name}
+          value={values.Name || ''}
           className='popup__input'
+          minLength='2'
         />
-        <span id='password-error' className='popup__error_visible popup__error_exist'>
-          Такой пользователь уже есть
+        <span id='name-error' className='popup__error_visible'>
+          {errors.Name}
         </span>
+        {registerError && (
+          <div id='user-error' className='popup__error_visible popup__error_exist'>
+            Такой пользователь уже есть
+          </div>
+        )}
         {/* <button type='submit' className='popup__button' onClick={showInfoPopup}> */}
-        <button type='submit' className='popup__button'>
+        <button type='submit' className='popup__button' disabled={!isValid}>
           Зарегистрироваться
         </button>
         <p className='popup__text'>

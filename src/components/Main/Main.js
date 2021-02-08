@@ -15,6 +15,7 @@ function Main({
   saveArticle,
   savedArticles,
   handleOnAuthClick,
+  keyword,
 }) {
   return (
     <>
@@ -31,6 +32,7 @@ function Main({
           saveArticle={saveArticle}
           savedArticles={savedArticles}
           handleOnAuthClick={handleOnAuthClick}
+          keyword={keyword}
         />
       )}
       <About />
