@@ -216,7 +216,7 @@ function App() {
   // запись сохраненных новостей
   React.useEffect(() => {
     const token = localStorage.getItem('token');
-    loggedIn && getArticles(token).then((res) => res && setSavedArticles(res));
+    loggedIn && getArticles(token).then((res) => res && setSavedArticles(res.reverse()));
   }, [loggedIn]);
 
   // показ последних найденных новостей
